@@ -2,101 +2,144 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataCity</title>
+  <title>Billionaire Data City</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 
 <body class="bg-black text-white">
 
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center p-6 bg-gray-900 shadow-lg">
-    <h1 class="text-2xl font-bold text-yellow-400">DataCity</h1>
-    <div class="space-x-6">
-      <a href="#about" class="hover:text-yellow-400">About</a>
-      <a href="#services" class="hover:text-yellow-400">Services</a>
-      <a href="#contact" class="hover:text-yellow-400">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-    <h2 class="text-5xl font-bold mb-6 text-yellow-400">
-      Welcome to DataCity
+<!-- WELCOME POPUP -->
+<div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+  <div class="bg-gray-900 p-10 rounded-2xl text-center shadow-2xl max-w-md">
+    <h1 class="text-3xl font-bold text-yellow-400 mb-4">
+      WELCOME TO
+    </h1>
+    <h2 class="text-2xl font-bold mb-6">
+      BILLIONAIRE'S DATA CITY
     </h2>
-    <p class="text-lg max-w-2xl text-gray-300">
-      We provide powerful data solutions and digital services to help businesses grow smarter and faster.
+    <p class="text-gray-400 mb-6">
+      Fast • Reliable • Affordable Data Services
     </p>
-  </section>
+    <button onclick="closeWelcome()"
+      class="bg-yellow-400 text-black px-6 py-2 rounded-xl font-bold hover:bg-yellow-300">
+      Get Started
+    </button>
+  </div>
+</div>
 
-  <!-- About Section -->
-  <section id="about" class="bg-gray-900 py-16 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-yellow-400">About Us</h2>
-      <p class="text-gray-300 text-lg">
-        DataCity is focused on delivering high-quality digital and data services.
-        We help businesses transform ideas into powerful digital solutions.
-      </p>
-    </div>
-  </section>
+<!-- Navbar -->
+<nav class="flex justify-between items-center p-6 bg-gray-900">
+  <h1 class="text-2xl font-bold text-yellow-400">Billionaire Data City</h1>
+</nav>
 
-  <!-- Services Section -->
-  <section id="services" class="py-16 px-6">
-    <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-12 text-yellow-400">Our Services</h2>
+<!-- Purchase Section -->
+<section class="py-16 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-10 text-yellow-400">Buy MTN Data Bundles</h2>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Web Development</h3>
-          <p class="text-gray-400">
-            Modern and responsive websites built for performance.
-          </p>
-        </div>
+    <div class="grid md:grid-cols-3 gap-6" id="bundleContainer"></div>
+  </div>
+</section>
 
-        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Data Solutions</h3>
-          <p class="text-gray-400">
-            Smart data management and analytics systems.
-          </p>
-        </div>
+<!-- Contact Section -->
+<section class="bg-gray-900 py-12 text-center">
+  <h2 class="text-2xl font-bold text-yellow-400 mb-4">Contact Information</h2>
+  <p>📞 0542021230</p>
+  <p>📍 Winneba</p>
+  <p>🕒 Working Hours: 6AM - 9PM</p>
+</section>
 
-        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Digital Consulting</h3>
-          <p class="text-gray-400">
-            Professional guidance for digital transformation.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+  <div class="bg-gray-900 p-8 rounded-xl w-96">
+    <h3 class="text-xl font-bold mb-4 text-yellow-400">Complete Purchase</h3>
 
-  <!-- Contact Section -->
-  <section id="contact" class="bg-gray-900 py-16 px-6">
-    <div class="max-w-4xl mx-auto">
+    <input id="customerName" type="text" placeholder="Full Name"
+      class="w-full p-2 mb-4 rounded bg-black border border-gray-600">
 
-      <h2 class="text-3xl font-bold mb-10 text-center text-yellow-400">
-        Contact Information
-      </h2>
+    <input id="customerPhone" type="text" placeholder="MTN Phone Number"
+      class="w-full p-2 mb-4 rounded bg-black border border-gray-600">
 
-      <div class="bg-black rounded-2xl p-8 space-y-6 text-lg shadow-xl">
+    <button onclick="payNow()" 
+      class="w-full bg-yellow-400 text-black py-2 rounded font-bold">
+      Pay Now
+    </button>
 
-        <div class="flex justify-between border-b border-gray-700 pb-3">
-          <span class="font-semibold">📞 Phone:</span>
-          <span>0542021230</span>
-        </div>
+    <button onclick="closeModal()" 
+      class="w-full mt-3 text-red-400">
+      Cancel
+    </button>
+  </div>
+</div>
 
-        <div class="flex justify-between border-b border-gray-700 pb-3">
-          <span class="font-semibold">📍 Address:</span>
-          <span>Winneba</span>
-        </div>
+<script>
+  // CLOSE WELCOME POPUP
+  function closeWelcome(){
+    document.getElementById("welcomeModal").style.display = "none";
+  }
 
-      </div>
-    </div>
-  </section>
+  // DATA BUNDLES
+  const bundles = [
+    ["1GB",5],["2GB",10],["3GB",14.5],["4GB",19.5],
+    ["5GB",23.5],["6GB",25.5],["8GB",34.5],["10GB",42.5],
+    ["15GB",70],["20GB",81],["25GB",101],["30GB",123],
+    ["40GB",160],["50GB",210]
+  ];
 
-  <!-- Footer -->
-  <footer class="text-center py-6 bg-black text-gray-500">
-    © 2026 DataCity. All rights reserved.
-  </footer>
+  const container = document.getElementById("bundleContainer");
+  let selectedPrice = 0;
+
+  bundles.forEach(bundle => {
+    const div = document.createElement("div");
+    div.className = "bg-gray-900 p-6 rounded-xl shadow-lg text-center";
+    div.innerHTML = `
+      <h3 class="text-lg font-bold mb-2">${bundle[0]} Data</h3>
+      <p class="text-yellow-400 text-xl mb-4">GHS ${bundle[1]}</p>
+      <button onclick="openModal(${bundle[1]})"
+        class="bg-yellow-400 text-black px-4 py-2 rounded font-semibold">
+        Buy Now
+      </button>
+    `;
+    container.appendChild(div);
+  });
+
+  function openModal(price){
+    selectedPrice = price;
+    document.getElementById("checkoutModal").classList.remove("hidden");
+    document.getElementById("checkoutModal").classList.add("flex");
+  }
+
+  function closeModal(){
+    document.getElementById("checkoutModal").classList.add("hidden");
+  }
+
+  function payNow(){
+    const name = document.getElementById("customerName").value;
+    const phone = document.getElementById("customerPhone").value;
+
+    if(!name || !phone){
+      alert("Please fill all fields");
+      return;
+    }
+
+    let handler = PaystackPop.setup({
+      key: "YOUR_PAYSTACK_PUBLIC_KEY",
+      email: name.replace(/\s/g,'') + "@gmail.com",
+      amount: selectedPrice * 100,
+      currency: "GHS",
+      callback: function(response){
+        alert("Payment successful!\n\nYour data will be delivered within 5-10 minutes.\n\nThank you for choosing Billionaire's Data City.");
+        closeModal();
+      },
+      onClose: function(){
+        alert("Transaction cancelled");
+      }
+    });
+
+    handler.openIframe();
+  }
+</script>
 
 </body>
 </html>
