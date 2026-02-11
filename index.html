@@ -1,94 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DataMart - Buy MTN Data</title>
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataCity</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-black text-white min-h-screen">
+<body class="bg-black text-white">
 
-<div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold text-yellow-400 mb-6">
-        DataMart - MTN Data Bundles
-    </h1>
-
-    <div id="bundles" class="grid md:grid-cols-3 gap-4 mb-6"></div>
-
-    <div class="bg-gray-900 p-4 rounded-xl">
-        <h2 class="text-lg font-semibold mb-3">Buy Data</h2>
-
-        <input 
-            type="tel" 
-            id="phone"
-            placeholder="Enter MTN Number"
-            class="w-full p-3 rounded bg-gray-800 mb-3 outline-none"
-        />
-
-        <button 
-            onclick="payNow()" 
-            class="w-full bg-yellow-400 text-black font-bold p-3 rounded hover:bg-yellow-300"
-        >
-            Pay Now
-        </button>
-    </div>
-</div>
+<div id="app"></div>
 
 <script>
-const PAYSTACK_PUBLIC_KEY = "pk_test_replace_with_your_key";
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 
-let selectedAmount = 0;
+function saveUsers() {
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+function saveCurrentUser() {
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+}
+
+function render() {
+    if (!currentUser) {
+        document.getElementById("app").innerHTML = authPage();
+    } else {
+        document.getElementById("app").innerHTML = dashboardPage();
+    }
+}
+
+function authPage() {
+return `
+<div class="min-h-screen flex items-center justify-center">
+<div class="bg-gray-900 p-8 rounded-xl w-96">
+<h2 class="text-2xl font-bold mb-4 text-yellow-400">Login / Register</h2>
+
+<input id="username" placeholder="Username" class="w-full p-2 mb-3 bg-gray-800 rounded">
+<input id="password" type="password" placeholder="Password" class="w-full p-2 mb-3 bg-gray-800 rounded">
+
+<button onclick="register()" class="w-full bg-yellow-400 text-black p-2 rounded mb-2">Register</button>
+<button onclick="login()" class="w-full bg-green-500 p-2 rounded">Login</button>
+</div>
+</div>
+`;
+}
+
+function register() {
+let username = document.getElementById("username").value;
+let password = document.getElementById("password").value;
+
+if (!username || !password) return alert("Fill all fields");
+
+users.push({ username, password, wallet: 0, transactions: [] });
+saveUsers();
+alert("Registered successfully");
+}
+
+function login() {
+let username = document.getElementById("username").value;
+let password = document.getElementById("password").value;
+
+let user = users.find(u => u.username === username && u.password === password);
+if (!user) return alert("Invalid login");
+
+currentUser = user;
+saveCurrentUser();
+render();
+}
+
+function logout() {
+currentUser = null;
+saveCurrentUser();
+render();
+}
+
+function dashboardPage() {
+return `
+<div class="p-6">
+
+<div class="flex justify-between items-center mb-6">
+<h1 class="text-2xl font-bold text-yellow-400">Welcome ${currentUser.username}</h1>
+<button onclick="logout()" class="bg-red-500 px-4 py-1 rounded">Logout</button>
+</div>
+
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+
+<div class="bg-gray-900 p-4 rounded">
+<h3 class="font-bold">Wallet</h3>
+<p>GH₵ ${currentUser.wallet}</p>
+</div>
+
+<div class="bg-gray-900 p-4 rounded">
+<h3 class="font-bold">Working Hours</h3>
+<p>6AM - 9PM</p>
+</div>
+
+<div class="bg-gray-900 p-4 rounded">
+<h3 class="font-bold">WhatsApp</h3>
+<p>+233XXXXXXXXX</p>
+</div>
+
+</div>
+
+<h2 class="text-xl font-bold mb-3">Buy Data</h2>
+<div class="grid md:grid-cols-3 gap-3 mb-6">
+${priceList()}
+</div>
+
+<h2 class="text-xl font-bold mb-3">Transaction History</h2>
+<div class="bg-gray-900 p-4 rounded">
+${transactionList()}
+</div>
+
+<div class="mt-6 bg-gray-900 p-4 rounded">
+<h3 class="font-bold mb-2">Contact Info</h3>
+<p>Address: Your Business Address Here</p>
+<p>Location: Ghana</p>
+</div>
+
+</div>
+`;
+}
 
 const bundles = [
-    { name: "1GB", price: 10 },
-    { name: "2GB", price: 18 },
-    { name: "5GB", price: 40 },
-    { name: "10GB", price: 75 },
-    { name: "20GB", price: 140 },
-    { name: "50GB", price: 330 },
+["1GB",5],["2GB",10],["3GB",14.5],["4GB",19.5],
+["5GB",23.5],["6GB",25.5],["8GB",34.5],["10GB",42.5],
+["15GB",70],["20GB",81],["25GB",101],["30GB",123],
+["40GB",160],["50GB",210]
 ];
 
-const bundleContainer = document.getElementById("bundles");
-
-bundles.forEach(bundle => {
-    const div = document.createElement("div");
-    div.className = "bg-yellow-400 text-black p-4 rounded-xl cursor-pointer font-bold text-center";
-    div.innerHTML = `${bundle.name}<br/>GH₵ ${bundle.price}`;
-    div.onclick = () => {
-        selectedAmount = bundle.price;
-        alert(bundle.name + " selected");
-    };
-    bundleContainer.appendChild(div);
-});
-
-function payNow() {
-    const phone = document.getElementById("phone").value;
-
-    if (!phone || !selectedAmount) {
-        alert("Enter phone number and select bundle");
-        return;
-    }
-
-    const momoFee = selectedAmount * 0.03;
-    const total = selectedAmount + momoFee;
-
-    let handler = PaystackPop.setup({
-        key: PAYSTACK_PUBLIC_KEY,
-        email: phone + "@datamart.com",
-        amount: total * 100,
-        currency: "GHS",
-        callback: function(response) {
-            alert("Payment successful! Ref: " + response.reference);
-        },
-        onClose: function() {
-            alert("Transaction cancelled");
-        }
-    });
-
-    handler.openIframe();
+function priceList() {
+return bundles.map(b =>
+`<div onclick="buy('${b[0]}',${b[1]})"
+class="bg-yellow-400 text-black p-3 rounded cursor-pointer font-bold text-center">
+${b[0]} <br> GH₵ ${b[1]}
+</div>`
+).join("");
 }
+
+function buy(bundle, price) {
+currentUser.transactions.push(bundle + " - GH₵ " + price);
+saveUsers();
+alert("Order received (Manual Fulfillment)");
+render();
+}
+
+function transactionList() {
+if (currentUser.transactions.length === 0) return "No transactions yet";
+
+return currentUser.transactions.map(t =>
+`<p class="border-b border-gray-700 py-1">${t}</p>`
+).join("");
+}
+
+render();
 </script>
 
 </body>
