@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DataMart - Buy MTN Data</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white min-h-screen">
+
+<div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-yellow-400 mb-6">
+        DataMart - MTN Data Bundles
+    </h1>
+
+    <div id="bundles" class="grid md:grid-cols-3 gap-4 mb-6"></div>
+
+    <div class="bg-gray-900 p-4 rounded-xl">
+        <h2 class="text-lg font-semibold mb-3">Buy Data</h2>
+
+        <input 
+            type="tel" 
+            id="phone"
+            placeholder="Enter MTN Number"
+            class="w-full p-3 rounded bg-gray-800 mb-3 outline-none"
+        />
+
+        <button 
+            onclick="payNow()" 
+            class="w-full bg-yellow-400 text-black font-bold p-3 rounded hover:bg-yellow-300"
+        >
+            Pay Now
+        </button>
+    </div>
+</div>
+
+<script>
+const PAYSTACK_PUBLIC_KEY = "pk_test_replace_with_your_key";
+
+let selectedAmount = 0;
+
+const bundles = [
+    { name: "1GB", price: 10 },
+    { name: "2GB", price: 18 },
+    { name: "5GB", price: 40 },
+    { name: "10GB", price: 75 },
+    { name: "20GB", price: 140 },
+    { name: "50GB", price: 330 },
+];
+
+const bundleContainer = document.getElementById("bundles");
+
+bundles.forEach(bundle => {
+    const div = document.createElement("div");
+    div.className = "bg-yellow-400 text-black p-4 rounded-xl cursor-pointer font-bold text-center";
+    div.innerHTML = `${bundle.name}<br/>GH₵ ${bundle.price}`;
+    div.onclick = () => {
+        selectedAmount = bundle.price;
+        alert(bundle.name + " selected");
+    };
+    bundleContainer.appendChild(div);
+});
+
+function payNow() {
+    const phone = document.getElementById("phone").value;
+
+    if (!phone || !selectedAmount) {
+        alert("Enter phone number and select bundle");
+        return;
+    }
+
+    const momoFee = selectedAmount * 0.03;
+    const total = selectedAmount + momoFee;
+
+    let handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: phone + "@datamart.com",
+        amount: total * 100,
+        currency: "GHS",
+        callback: function(response) {
+            alert("Payment successful! Ref: " + response.reference);
+        },
+        onClose: function() {
+            alert("Transaction cancelled");
+        }
+    });
+
+    handler.openIframe();
+}
+</script>
+
+</body>
+</html>
