@@ -1,24 +1,102 @@
-<!-- Contact Section -->
-<div class="min-h-screen flex items-center justify-center bg-black text-white p-6">
-  <div class="bg-gray-900 rounded-2xl shadow-xl p-8 max-w-md w-full">
-    
-    <h2 class="text-3xl font-bold mb-6 text-center text-yellow-400">
-      Contact Information
-    </h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataCity</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    <div class="space-y-4 text-lg">
+<body class="bg-black text-white">
 
-      <div class="flex justify-between border-b border-gray-700 pb-2">
-        <span class="font-semibold">📞 Phone:</span>
-        <span>0542021230</span>
-      </div>
-
-      <div class="flex justify-between border-b border-gray-700 pb-2">
-        <span class="font-semibold">📍 Address:</span>
-        <span>Winneba</span>
-      </div>
-
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center p-6 bg-gray-900 shadow-lg">
+    <h1 class="text-2xl font-bold text-yellow-400">DataCity</h1>
+    <div class="space-x-6">
+      <a href="#about" class="hover:text-yellow-400">About</a>
+      <a href="#services" class="hover:text-yellow-400">Services</a>
+      <a href="#contact" class="hover:text-yellow-400">Contact</a>
     </div>
+  </nav>
 
-  </div>
-</div>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <h2 class="text-5xl font-bold mb-6 text-yellow-400">
+      Welcome to DataCity
+    </h2>
+    <p class="text-lg max-w-2xl text-gray-300">
+      We provide powerful data solutions and digital services to help businesses grow smarter and faster.
+    </p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-gray-900 py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-yellow-400">About Us</h2>
+      <p class="text-gray-300 text-lg">
+        DataCity is focused on delivering high-quality digital and data services.
+        We help businesses transform ideas into powerful digital solutions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 px-6">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-12 text-yellow-400">Our Services</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <h3 class="text-xl font-semibold mb-4">Web Development</h3>
+          <p class="text-gray-400">
+            Modern and responsive websites built for performance.
+          </p>
+        </div>
+
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <h3 class="text-xl font-semibold mb-4">Data Solutions</h3>
+          <p class="text-gray-400">
+            Smart data management and analytics systems.
+          </p>
+        </div>
+
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <h3 class="text-xl font-semibold mb-4">Digital Consulting</h3>
+          <p class="text-gray-400">
+            Professional guidance for digital transformation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-gray-900 py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+
+      <h2 class="text-3xl font-bold mb-10 text-center text-yellow-400">
+        Contact Information
+      </h2>
+
+      <div class="bg-black rounded-2xl p-8 space-y-6 text-lg shadow-xl">
+
+        <div class="flex justify-between border-b border-gray-700 pb-3">
+          <span class="font-semibold">📞 Phone:</span>
+          <span>0542021230</span>
+        </div>
+
+        <div class="flex justify-between border-b border-gray-700 pb-3">
+          <span class="font-semibold">📍 Address:</span>
+          <span>Winneba</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-black text-gray-500">
+    © 2026 DataCity. All rights reserved.
+  </footer>
+
+</body>
+</html>
