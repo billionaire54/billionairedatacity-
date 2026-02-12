@@ -117,8 +117,12 @@
       if (error) {
         document.getElementById("message").innerText = error.message;
       } else {
-        document.getElementById("message").innerText = "Login successful!";
-        window.location.href = "dashboard.html";
+        document.getElementById("message").innerText =
+  "Signup successful! Redirecting...";
+
+setTimeout(() => {
+  window.location.href = "index.html";
+}, 1500);
       }
     }
   </script>
