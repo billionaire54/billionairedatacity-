@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up - Billionaire Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <h2>Create Account</h2>
+
+  <input type="email" id="email" placeholder="Enter your email" />
+  <br><br>
+  <input type="password" id="password" placeholder="Enter your password" />
+  <br><br>
+  <button onclick="signUp()">Sign Up</button>
+
+  <p id="message"></p>
+
+  <script>
+    const supabase = window.supabase.createClient(
+      "https://flrnzikyajwmcwkhdwtb.supabase.co",
+      "sb_publishable_EuTnSI1G058rf59-mX234A_7KGgbD46"
+    );
+
+    async function signUp() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        document.getElementById("message").innerText = error.message;
+      } else {
+        document.getElementById("message").innerText =
+          "Signup successful! Check your email to confirm.";
+      }
+    }
+  </script>
+
+</body>
+</html>
