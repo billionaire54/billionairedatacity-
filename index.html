@@ -1,70 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Billionaire Data</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire Data City</title>
 
-        h1 {
-            text-align: center;
-            color: #1e293b;
-        }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0b0f1a;
+  color: white;
+  text-align: center;
+}
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+header {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #facc15;
+}
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+h2 {
+  color: #facc15;
+}
 
-        li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+.hero {
+  background: #111827;
+  margin: 30px;
+  padding: 40px 20px;
+  border-radius: 20px;
+}
 
-        .contact {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e2e8f0;
-            border-radius: 8px;
-        }
-    </style>
+.hero h1 {
+  color: #facc15;
+  font-size: 28px;
+}
+
+.hero p {
+  color: #cbd5e1;
+  margin: 15px 0;
+}
+
+button {
+  background: #facc15;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.section {
+  margin: 30px 20px;
+}
+
+.card {
+  background: #111827;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.price {
+  color: #facc15;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.contact {
+  margin: 40px 20px;
+  padding: 20px;
+  background: #111827;
+  border-radius: 15px;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Welcome to Billionaire Data</h1>
+<header>Billionaire Data City</header>
 
-        <h3>Available Data Bundles</h3>
+<h2>Buy MTN Data Bundles</h2>
 
-        <ul>
-            <li>1GB - ₵5</li>
-            <li>2GB - ₵9</li>
-            <li>3GB - ₵13</li>
-            <li>5GB - ₵20</li>
-            <li>10GB - ₵38</li>
-        </ul>
+<div class="hero">
+  <h1>WELCOME TO<br>BILLIONAIRE'S DATA CITY</h1>
+  <p>Fast • Reliable • Affordable Data Services</p>
+  <button onclick="document.getElementById('mtn').scrollIntoView()">Get Started</button>
+</div>
 
-        <div class="contact">
-            <h3>Contact Information</h3>
-            <p><strong>Phone:</strong> +233542021230</p>
-            <p><strong>Location:</strong> Ghana</p>
-        </div>
-    </div>
+<div id="mtn" class="section">
+
+  <div class="card">
+    <h3>3GB Data</h3>
+    <div class="price">GHS 14.5</div>
+    <button>Buy Now</button>
+  </div>
+
+  <div class="card">
+    <h3>5GB Data</h3>
+    <div class="price">GHS 22</div>
+    <button>Buy Now</button>
+  </div>
+
+  <div class="card">
+    <h3>10GB Data</h3>
+    <div class="price">GHS 40</div>
+    <button>Buy Now</button>
+  </div>
+
+</div>
+
+<div class="contact">
+  <h3>Contact Us</h3>
+  <p>Phone: +233542021230</p>
+  <p>Location: Ghana</p>
+</div>
 
 </body>
 </html>
