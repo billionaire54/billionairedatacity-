@@ -1,145 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Billionaire Data City</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://js.paystack.co/v1/inline.js"></script>
-</head>
+  <title>Billionaire Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<body class="bg-black text-white">
-
-<!-- WELCOME POPUP -->
-<div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-  <div class="bg-gray-900 p-10 rounded-2xl text-center shadow-2xl max-w-md">
-    <h1 class="text-3xl font-bold text-yellow-400 mb-4">
-      WELCOME TO
-    </h1>
-    <h2 class="text-2xl font-bold mb-6">
-      BILLIONAIRE'S DATA CITY
-    </h2>
-    <p class="text-gray-400 mb-6">
-      Fast • Reliable • Affordable Data Services
-    </p>
-    <button onclick="closeWelcome()"
-      class="bg-yellow-400 text-black px-6 py-2 rounded-xl font-bold hover:bg-yellow-300">
-      Get Started
-    </button>
-  </div>
-</div>
-
-<!-- Navbar -->
-<nav class="flex justify-between items-center p-6 bg-gray-900">
-  <h1 class="text-2xl font-bold text-yellow-400">Billionaire Data City</h1>
-</nav>
-
-<!-- Purchase Section -->
-<section class="py-16 px-6">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl font-bold mb-10 text-yellow-400">Buy MTN Data Bundles</h2>
-
-    <div class="grid md:grid-cols-3 gap-6" id="bundleContainer"></div>
-  </div>
-</section>
-
-<!-- Contact Section -->
-<section class="bg-gray-900 py-12 text-center">
-  <h2 class="text-2xl font-bold text-yellow-400 mb-4">Contact Information</h2>
-  <p>📞 0542021230</p>
-  <p>📍 Winneba</p>
-  <p>🕒 Working Hours: 6AM - 9PM</p>
-</section>
-
-<!-- Checkout Modal -->
-<div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-  <div class="bg-gray-900 p-8 rounded-xl w-96">
-    <h3 class="text-xl font-bold mb-4 text-yellow-400">Complete Purchase</h3>
-
-    <input id="customerName" type="text" placeholder="Full Name"
-      class="w-full p-2 mb-4 rounded bg-black border border-gray-600">
-
-    <input id="customerPhone" type="text" placeholder="MTN Phone Number"
-      class="w-full p-2 mb-4 rounded bg-black border border-gray-600">
-
-    <button onclick="payNow()" 
-      class="w-full bg-yellow-400 text-black py-2 rounded font-bold">
-      Pay Now
-    </button>
-
-    <button onclick="closeModal()" 
-      class="w-full mt-3 text-red-400">
-      Cancel
-    </button>
-  </div>
-</div>
-<div id="buy"></div>
-<script>
-  // CLOSE WELCOME POPUP
-  function closeWelcome(){
-    document.getElementById("welcomeModal").style.display = "none";
-  }
-
-  // DATA BUNDLES
-  const bundles = [
-    ["1GB",5],["2GB",10],["3GB",14.5],["4GB",19.5],
-    ["5GB",23.5],["6GB",25.5],["8GB",34.5],["10GB",42.5],
-    ["15GB",70],["20GB",81],["25GB",101],["30GB",123],
-    ["40GB",160],["50GB",210]
-  ];
-
-  const container = document.getElementById("bundleContainer");
-  let selectedPrice = 0;
-
-  bundles.forEach(bundle => {
-    const div = document.createElement("div");
-    div.className = "bg-gray-900 p-6 rounded-xl shadow-lg text-center";
-    div.innerHTML = `
-      <h3 class="text-lg font-bold mb-2">${bundle[0]} Data</h3>
-      <p class="text-yellow-400 text-xl mb-4">GHS ${bundle[1]}</p>
-      <button onclick="openModal(${bundle[1]})"
-        class="bg-yellow-400 text-black px-4 py-2 rounded font-semibold">
-        Buy Now
-      </button>
-    `;
-    container.appendChild(div);
-  });
-
-  function openModal(price){
-    selectedPrice = price;
-    document.getElementById("checkoutModal").classList.remove("hidden");
-    document.getElementById("checkoutModal").classList.add("flex");
-  }
-
-  function closeModal(){
-    document.getElementById("checkoutModal").classList.add("hidden");
-  }
-
-  function payNow(){
-    const name = document.getElementById("customerName").value;
-    const phone = document.getElementById("customerPhone").value;
-
-    if(!name || !phone){
-      alert("Please fill all fields");
-      return;
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    let handler = PaystackPop.setup ({
-      key: "pk_live_480ac8f157690c4e383617bfe4ffc6aec3ff8a79",
-      email: name.replace(/\s/g,'') + "@gmail.com",
-      amount: selectedPrice * 100,
-      currency: "GHS",
-      callback: function(response){
-        alert("Payment successful!\n\nYour data will be delivered within 5-10 minutes.\n\nThank you for choosing Billionaire's Data City.");
-        closeModal();
-      },
-      onClose: function(){
-        alert("Transaction cancelled");
-      }
-    });
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      width: 320px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      text-align: center;
+    }
 
-    handler.openIframe();
-  }
-</script>
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2c5364;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #203a43;
+    }
+
+    #buySection {
+      display: none;
+      text-align: center;
+      color: white;
+    }
+
+    .bundle {
+      background: white;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN / SIGNUP SECTION -->
+  <div class="card" id="authSection">
+    <h2>Welcome to Billionaire Data</h2>
+
+    <input type="email" id="email" placeholder="Enter your email">
+    <input type="password" id="password" placeholder="Enter your password">
+
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="login()">Login</button>
+
+    <p id="message"></p>
+  </div>
+
+  <!-- BUYING SECTION -->
+  <div id="buySection">
+    <h1>Buy Data Bundles</h1>
+
+    <div class="bundle">1GB - ₵10</div>
+    <div class="bundle">2GB - ₵18</div>
+    <div class="bundle">5GB - ₵40</div>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const supabase = window.supabase.createClient(
+      "https://flrnzikyajwmcwkhdwtb.supabase.co",
+      "sb_publishable_EuTnSI1G058rf59-mX234A_7KGgbD46"
+    );
+
+    async function signUp() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { error } = await supabase.auth.signUp({
+        email,
+        password
+      });
+
+      if (error) {
+        document.getElementById("message").innerText = error.message;
+      } else {
+        document.getElementById("message").innerText =
+          "Signup successful! You can now login.";
+      }
+    }
+
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        document.getElementById("message").innerText = error.message;
+      } else {
+        document.getElementById("authSection").style.display = "none";
+        document.getElementById("buySection").style.display = "block";
+      }
+    }
+
+    async function logout() {
+      await supabase.auth.signOut();
+      document.getElementById("authSection").style.display = "block";
+      document.getElementById("buySection").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
