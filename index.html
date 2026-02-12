@@ -1,102 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Billionaire Data</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire Data</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    header {
-      padding: 20px;
-      background: #111827;
-      font-size: 20px;
-      font-weight: bold;
-    }
+body {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  text-align: center;
+}
 
-    .hero {
-      padding: 80px 20px;
-    }
+header {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  background: rgba(0,0,0,0.3);
+}
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
+.hero {
+  padding: 100px 20px;
+}
 
-    p {
-      font-size: 18px;
-      color: #cbd5e1;
-    }
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
 
-    .btn {
-      display: inline-block;
-      margin: 15px;
-      padding: 12px 25px;
-      background: #22c55e;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
+.hero p {
+  font-size: 18px;
+  color: #cbd5e1;
+  margin-bottom: 30px;
+}
 
-    .btn:hover {
-      background: #16a34a;
-    }
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  margin: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    section {
-      padding: 60px 20px;
-    }
+.primary {
+  background: #22c55e;
+  color: white;
+}
 
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 400px;
-      border-radius: 10px;
-    }
-  </style>
+.primary:hover {
+  background: #16a34a;
+}
+
+.secondary {
+  border: 2px solid #22c55e;
+  color: #22c55e;
+}
+
+.secondary:hover {
+  background: #22c55e;
+  color: white;
+}
+
+section {
+  padding: 70px 20px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.card {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 22px;
+  margin: 10px 0;
+  color: #22c55e;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  Billionaire Data
-</header>
+<header>Billionaire Data</header>
 
 <div class="hero">
   <h1>Welcome to Billionaire Data</h1>
   <p>Fast, Reliable & Affordable Data Bundles</p>
 
-  <a href="#buy" class="btn">Get Started</a>
-  <a href="#buy" class="btn">Buy Data</a>
+  <a href="#buy" class="btn primary">Get Started</a>
+  <a href="#buy" class="btn secondary">Buy Data</a>
 </div>
 
 <section id="buy">
   <h2>Buy Data</h2>
+  <div class="cards">
 
-  <div class="card">
-    <h3>1GB Data</h3>
-    <p>₵5</p>
-    <a href="#" class="btn">Buy Now</a>
-  </div>
+    <div class="card">
+      <h3>1GB Data</h3>
+      <div class="price">₵5</div>
+      <a href="#" class="btn primary">Buy Now</a>
+    </div>
 
-  <div class="card">
-    <h3>2GB Data</h3>
-    <p>₵9</p>
-    <a href="#" class="btn">Buy Now</a>
-  </div>
+    <div class="card">
+      <h3>2GB Data</h3>
+      <div class="price">₵9</div>
+      <a href="#" class="btn primary">Buy Now</a>
+    </div>
 
-  <div class="card">
-    <h3>5GB Data</h3>
-    <p>₵20</p>
-    <a href="#" class="btn">Buy Now</a>
+    <div class="card">
+      <h3>5GB Data</h3>
+      <div class="price">₵20</div>
+      <a href="#" class="btn primary">Buy Now</a>
+    </div>
+
   </div>
 </section>
 
