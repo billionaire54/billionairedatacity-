@@ -90,10 +90,14 @@
   </div>
 
   <script>
-    const supabase = window.supabase.createClient(
-      "https://flrnzikyajwmcwkhdwtb.supabase.co",
-      "sb_publishable_EuTnSI1G058rf59-mX234A_7KGgbD46"
-    );
+  const { createClient } = window.supabase;
+
+  const supabase = createClient(
+    "https://flrnzikyajwmcwkhwdtb.supabase.co",
+    "sb_publishable_EuTnSI1GO58rf59-mX234A_7KgbD46"
+  );
+
+  async function signUp() {
 
     async function signUp() {
       const email = document.getElementById("email").value;
