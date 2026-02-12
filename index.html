@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,106 +14,129 @@ body {
   text-align: center;
 }
 
-header {
-  padding: 20px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #facc15;
-}
-
-h2 {
-  color: #facc15;
-}
-
-.hero {
-  background: #111827;
-  margin: 30px;
-  padding: 40px 20px;
-  border-radius: 20px;
-}
-
-.hero h1 {
-  color: #facc15;
-  font-size: 28px;
-}
-
-.hero p {
-  color: #cbd5e1;
-  margin: 15px 0;
+#welcome {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
   background: #facc15;
   border: none;
-  padding: 12px 25px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   margin-top: 10px;
 }
 
-.section {
-  margin: 30px 20px;
-}
-
 .card {
   background: #111827;
-  margin: 15px;
-  padding: 20px;
+  margin: 12px;
+  padding: 18px;
   border-radius: 15px;
 }
 
 .price {
   color: #facc15;
-  font-size: 20px;
-  margin: 10px 0;
+  font-size: 16px;
 }
 
-.contact {
-  margin: 40px 20px;
+#mainContent {
+  display: none;
   padding: 20px;
-  background: #111827;
-  border-radius: 15px;
+}
+
+#formSection {
+  display: none;
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
 }
 </style>
 </head>
 
 <body>
 
-<header>Billionaire Data City</header>
-
-<h2>Buy MTN Data Bundles</h2>
-
-<div class="hero">
-  <h1>WELCOME TO<br>BILLIONAIRE'S DATA CITY</h1>
-  <p>Fast • Reliable • Affordable Data Services</p>
-  <button onclick="document.getElementById('mtn').scrollIntoView()">Get Started</button>
+<!-- Welcome Screen -->
+<div id="welcome">
+  <h1 style="color:#facc15;">WELCOME TO BILLIONAIRE'S DATA CITY</h1>
+  <p>Fast • Reliable • Affordable</p>
+  <button onclick="startSite()">Get Started</button>
 </div>
 
-<div id="mtn" class="section">
+<!-- Price List -->
+<div id="mainContent">
+  <h2 style="color:#facc15;">Buy MTN Data Bundles</h2>
 
-  <div class="card"><h3>1GB Data</h3><div class="price">GHS 5</div><button>Buy Now</button></div>
-  <div class="card"><h3>2GB Data</h3><div class="price">GHS 10</div><button>Buy Now</button></div>
-  <div class="card"><h3>3GB Data</h3><div class="price">GHS 14.5</div><button>Buy Now</button></div>
-  <div class="card"><h3>4GB Data</h3><div class="price">GHS 19.5</div><button>Buy Now</button></div>
-  <div class="card"><h3>5GB Data</h3><div class="price">GHS 23.5</div><button>Buy Now</button></div>
-  <div class="card"><h3>6GB Data</h3><div class="price">GHS 25.5</div><button>Buy Now</button></div>
-  <div class="card"><h3>8GB Data</h3><div class="price">GHS 34.5</div><button>Buy Now</button></div>
-  <div class="card"><h3>10GB Data</h3><div class="price">GHS 42.5</div><button>Buy Now</button></div>
-  <div class="card"><h3>15GB Data</h3><div class="price">GHS 70</div><button>Buy Now</button></div>
-  <div class="card"><h3>20GB Data</h3><div class="price">GHS 81</div><button>Buy Now</button></div>
-  <div class="card"><h3>25GB Data</h3><div class="price">GHS 101</div><button>Buy Now</button></div>
-  <div class="card"><h3>30GB Data</h3><div class="price">GHS 123</div><button>Buy Now</button></div>
-  <div class="card"><h3>40GB Data</h3><div class="price">GHS 160</div><button>Buy Now</button></div>
-  <div class="card"><h3>50GB Data</h3><div class="price">GHS 210</div><button>Buy Now</button></div>
+  <div class="card"><h3>1GB</h3><div class="price">GHS 5</div><button onclick="buyData('1GB - GHS 5')">Buy Now</button></div>
+  <div class="card"><h3>2GB</h3><div class="price">GHS 10</div><button onclick="buyData('2GB - GHS 10')">Buy Now</button></div>
+  <div class="card"><h3>3GB</h3><div class="price">GHS 14.5</div><button onclick="buyData('3GB - GHS 14.5')">Buy Now</button></div>
+  <div class="card"><h3>4GB</h3><div class="price">GHS 19.5</div><button onclick="buyData('4GB - GHS 19.5')">Buy Now</button></div>
+  <div class="card"><h3>5GB</h3><div class="price">GHS 23.5</div><button onclick="buyData('5GB - GHS 23.5')">Buy Now</button></div>
+  <div class="card"><h3>6GB</h3><div class="price">GHS 25.5</div><button onclick="buyData('6GB - GHS 25.5')">Buy Now</button></div>
+  <div class="card"><h3>8GB</h3><div class="price">GHS 34.5</div><button onclick="buyData('8GB - GHS 34.5')">Buy Now</button></div>
+  <div class="card"><h3>10GB</h3><div class="price">GHS 42.5</div><button onclick="buyData('10GB - GHS 42.5')">Buy Now</button></div>
+  <div class="card"><h3>15GB</h3><div class="price">GHS 70</div><button onclick="buyData('15GB - GHS 70')">Buy Now</button></div>
+  <div class="card"><h3>20GB</h3><div class="price">GHS 81</div><button onclick="buyData('20GB - GHS 81')">Buy Now</button></div>
+  <div class="card"><h3>25GB</h3><div class="price">GHS 101</div><button onclick="buyData('25GB - GHS 101')">Buy Now</button></div>
+  <div class="card"><h3>30GB</h3><div class="price">GHS 123</div><button onclick="buyData('30GB - GHS 123')">Buy Now</button></div>
+  <div class="card"><h3>40GB</h3><div class="price">GHS 160</div><button onclick="buyData('40GB - GHS 160')">Buy Now</button></div>
+  <div class="card"><h3>50GB</h3><div class="price">GHS 210</div><button onclick="buyData('50GB - GHS 210')">Buy Now</button></div>
 
 </div>
 
-<div class="contact">
-  <h3>Contact Us</h3>
-  <p>Phone: +233XXXXXXXXX</p>
-  <p>Location: Ghana</p>
+<!-- Order Form -->
+<div id="formSection">
+  <h2>Enter Your Details</h2>
+  <input type="text" id="name" placeholder="Your Name"><br>
+  <input type="tel" id="phone" placeholder="Your Phone Number"><br>
+  <button onclick="placeOrder()">Place Order</button>
 </div>
+
+<script>
+
+let selectedBundle = "";
+
+function startSite() {
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("mainContent").style.display = "block";
+}
+
+function buyData(bundle) {
+  selectedBundle = bundle;
+  document.getElementById("mainContent").style.display = "none";
+  document.getElementById("formSection").style.display = "block";
+}
+
+function placeOrder() {
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+
+  if(name === "" || phone === "") {
+    alert("Please enter your name and phone number");
+    return;
+  }
+
+  let message = `Hello, my name is ${name}. I want to buy ${selectedBundle}. My number is ${phone}.`;
+
+  let whatsappNumber = "+233542021230"; // PUT YOUR REAL NUMBER HERE
+
+  let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+}
+
+</script>
 
 </body>
 </html>
