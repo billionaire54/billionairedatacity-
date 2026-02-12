@@ -1,144 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Billionaire Data</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: #111827;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 80px 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #cbd5e1;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 12px 25px;
+      background: #22c55e;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #16a34a;
+    }
+
+    section {
+      padding: 60px 20px;
     }
 
     .card {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      width: 320px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      text-align: center;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #2c5364;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #203a43;
-    }
-
-    #buySection {
-      display: none;
-      text-align: center;
-      color: white;
-    }
-
-    .bundle {
-      background: white;
-      margin: 10px;
-      padding: 15px;
+      background: #1e293b;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
       border-radius: 10px;
-      color: black;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- LOGIN / SIGNUP SECTION -->
-  <div class="card" id="authSection">
-    <h2>Welcome to Billionaire Data</h2>
+<header>
+  Billionaire Data
+</header>
 
-    <input type="email" id="email" placeholder="Enter your email">
-    <input type="password" id="password" placeholder="Enter your password">
+<div class="hero">
+  <h1>Welcome to Billionaire Data</h1>
+  <p>Fast, Reliable & Affordable Data Bundles</p>
 
-    <button onclick="signUp()">Sign Up</button>
-    <button onclick="login()">Login</button>
+  <a href="#buy" class="btn">Get Started</a>
+  <a href="#buy" class="btn">Buy Data</a>
+</div>
 
-    <p id="message"></p>
+<section id="buy">
+  <h2>Buy Data</h2>
+
+  <div class="card">
+    <h3>1GB Data</h3>
+    <p>₵5</p>
+    <a href="#" class="btn">Buy Now</a>
   </div>
 
-  <!-- BUYING SECTION -->
-  <div id="buySection">
-    <h1>Buy Data Bundles</h1>
-
-    <div class="bundle">1GB - ₵10</div>
-    <div class="bundle">2GB - ₵18</div>
-    <div class="bundle">5GB - ₵40</div>
-
-    <button onclick="logout()">Logout</button>
+  <div class="card">
+    <h3>2GB Data</h3>
+    <p>₵9</p>
+    <a href="#" class="btn">Buy Now</a>
   </div>
 
-  <script>
-  const { createClient } = window.supabase;
-
-  const supabase = createClient(
-    "https://flrnzikyajwmcwkhwdtb.supabase.co",
-    "sb_publishable_EuTnSI1GO58rf59-mX234A_7KgbD46"
-  );
-
-  async function signUp() {
-
-    async function signUp() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      const { error } = await supabase.auth.signUp({
-        email,
-        password
-      });
-
-      if (error) {
-        document.getElementById("message").innerText = error.message;
-      } else {
-        document.getElementById("message").innerText =
-          "Signup successful! You can now login.";
-      }
-    }
-
-    async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (error) {
-        document.getElementById("message").innerText = error.message;
-      } else {
-        document.getElementById("authSection").style.display = "none";
-        document.getElementById("buySection").style.display = "block";
-      }
-    }
-
-    async function logout() {
-      await supabase.auth.signOut();
-      document.getElementById("authSection").style.display = "block";
-      document.getElementById("buySection").style.display = "none";
-    }
-  </script>
+  <div class="card">
+    <h3>5GB Data</h3>
+    <p>₵20</p>
+    <a href="#" class="btn">Buy Now</a>
+  </div>
+</section>
 
 </body>
 </html>
