@@ -19,7 +19,11 @@
     }
 
     .welcome {
-      padding: 40px 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .btn {
@@ -47,7 +51,7 @@
       margin: 10px auto;
       padding: 20px;
       border-radius: 10px;
-      max-width: 300px;
+      max-width: 320px;
     }
 
     .price {
@@ -88,8 +92,9 @@
       padding: 15px;
       margin: 15px auto;
       border-radius: 8px;
-      max-width: 300px;
+      max-width: 320px;
     }
+
   </style>
 </head>
 
@@ -97,12 +102,14 @@
 
 <h1>Billionaire Data City</h1>
 
+<!-- WELCOME -->
 <div class="welcome" id="welcome">
   <h2>WELCOME TO BILLIONAIRE'S DATA CITY</h2>
   <p>Fast • Reliable • Affordable Data Services</p>
   <button class="btn" onclick="showBundles()">Get Started</button>
 </div>
 
+<!-- BUNDLES -->
 <div class="bundles" id="bundles">
 
   <h2>Buy MTN Data Bundles</h2>
@@ -115,7 +122,14 @@
   <div class="card"><h3>6GB</h3><div class="price">GHS 25.5</div><button class="btn" onclick="order('6GB','25.5')">Buy Now</button></div>
   <div class="card"><h3>8GB</h3><div class="price">GHS 34.5</div><button class="btn" onclick="order('8GB','34.5')">Buy Now</button></div>
   <div class="card"><h3>10GB</h3><div class="price">GHS 42.5</div><button class="btn" onclick="order('10GB','42.5')">Buy Now</button></div>
+  <div class="card"><h3>15GB</h3><div class="price">GHS 70</div><button class="btn" onclick="order('15GB','70')">Buy Now</button></div>
+  <div class="card"><h3>20GB</h3><div class="price">GHS 81</div><button class="btn" onclick="order('20GB','81')">Buy Now</button></div>
+  <div class="card"><h3>25GB</h3><div class="price">GHS 101</div><button class="btn" onclick="order('25GB','101')">Buy Now</button></div>
+  <div class="card"><h3>30GB</h3><div class="price">GHS 123</div><button class="btn" onclick="order('30GB','123')">Buy Now</button></div>
+  <div class="card"><h3>40GB</h3><div class="price">GHS 160</div><button class="btn" onclick="order('40GB','160')">Buy Now</button></div>
+  <div class="card"><h3>50GB</h3><div class="price">GHS 210</div><button class="btn" onclick="order('50GB','210')">Buy Now</button></div>
 
+  <!-- TRUST SECTION -->
   <div class="trust-section">
     <h2>Why Choose Us</h2>
     <ul>
@@ -126,6 +140,7 @@
     </ul>
   </div>
 
+  <!-- REVIEWS -->
   <div class="reviews-section">
     <h2>Customer Reviews</h2>
 
@@ -150,6 +165,7 @@
 
 </div>
 
+<!-- FORM -->
 <div class="form-section" id="formSection">
   <h2>Enter Your Details</h2>
   <input type="text" id="name" placeholder="Your Name">
