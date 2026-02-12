@@ -1,141 +1,195 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Billionaire Data City</title>
+  <title>Billionaire Data City</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #0b0f1a;
-  color: white;
-  text-align: center;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1220;
+      color: white;
+      text-align: center;
+    }
 
-#welcome {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+    h1 {
+      padding: 20px;
+      color: #00bfff;
+    }
 
-button {
-  background: #facc15;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-}
+    .welcome {
+      padding: 40px 20px;
+    }
 
-.card {
-  background: #111827;
-  margin: 12px;
-  padding: 18px;
-  border-radius: 15px;
-}
+    .btn {
+      background: #00bfff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
 
-.price {
-  color: #facc15;
-  font-size: 16px;
-}
+    .btn:hover {
+      opacity: 0.8;
+    }
 
-#mainContent {
-  display: none;
-  padding: 20px;
-}
+    .bundles {
+      display: none;
+      padding: 20px;
+    }
 
-#formSection {
-  display: none;
-  padding: 20px;
-}
+    .card {
+      background: #111a2e;
+      margin: 10px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 300px;
+    }
 
-input {
-  padding: 10px;
-  width: 80%;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: none;
-}
-</style>
+    .price {
+      color: #00ffcc;
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .form-section {
+      display: none;
+      padding: 20px;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .trust-section, .reviews-section {
+      padding: 40px 20px;
+    }
+
+    .trust-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .trust-section li {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .review {
+      background: #111a2e;
+      padding: 15px;
+      margin: 15px auto;
+      border-radius: 8px;
+      max-width: 300px;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- Welcome Screen -->
-<div id="welcome">
-  <h1 style="color:#facc15;">WELCOME TO BILLIONAIRE'S DATA CITY</h1>
-  <p>Fast • Reliable • Affordable</p>
-  <button onclick="startSite()">Get Started</button>
+<h1>Billionaire Data City</h1>
+
+<div class="welcome" id="welcome">
+  <h2>WELCOME TO BILLIONAIRE'S DATA CITY</h2>
+  <p>Fast • Reliable • Affordable Data Services</p>
+  <button class="btn" onclick="showBundles()">Get Started</button>
 </div>
 
-<!-- Price List -->
-<div id="mainContent">
-  <h2 style="color:#facc15;">Buy MTN Data Bundles</h2>
+<div class="bundles" id="bundles">
 
-  <div class="card"><h3>1GB</h3><div class="price">GHS 5</div><button onclick="buyData('1GB - GHS 5')">Buy Now</button></div>
-  <div class="card"><h3>2GB</h3><div class="price">GHS 10</div><button onclick="buyData('2GB - GHS 10')">Buy Now</button></div>
-  <div class="card"><h3>3GB</h3><div class="price">GHS 14.5</div><button onclick="buyData('3GB - GHS 14.5')">Buy Now</button></div>
-  <div class="card"><h3>4GB</h3><div class="price">GHS 19.5</div><button onclick="buyData('4GB - GHS 19.5')">Buy Now</button></div>
-  <div class="card"><h3>5GB</h3><div class="price">GHS 23.5</div><button onclick="buyData('5GB - GHS 23.5')">Buy Now</button></div>
-  <div class="card"><h3>6GB</h3><div class="price">GHS 25.5</div><button onclick="buyData('6GB - GHS 25.5')">Buy Now</button></div>
-  <div class="card"><h3>8GB</h3><div class="price">GHS 34.5</div><button onclick="buyData('8GB - GHS 34.5')">Buy Now</button></div>
-  <div class="card"><h3>10GB</h3><div class="price">GHS 42.5</div><button onclick="buyData('10GB - GHS 42.5')">Buy Now</button></div>
-  <div class="card"><h3>15GB</h3><div class="price">GHS 70</div><button onclick="buyData('15GB - GHS 70')">Buy Now</button></div>
-  <div class="card"><h3>20GB</h3><div class="price">GHS 81</div><button onclick="buyData('20GB - GHS 81')">Buy Now</button></div>
-  <div class="card"><h3>25GB</h3><div class="price">GHS 101</div><button onclick="buyData('25GB - GHS 101')">Buy Now</button></div>
-  <div class="card"><h3>30GB</h3><div class="price">GHS 123</div><button onclick="buyData('30GB - GHS 123')">Buy Now</button></div>
-  <div class="card"><h3>40GB</h3><div class="price">GHS 160</div><button onclick="buyData('40GB - GHS 160')">Buy Now</button></div>
-  <div class="card"><h3>50GB</h3><div class="price">GHS 210</div><button onclick="buyData('50GB - GHS 210')">Buy Now</button></div>
+  <h2>Buy MTN Data Bundles</h2>
+
+  <div class="card"><h3>1GB</h3><div class="price">GHS 5</div><button class="btn" onclick="order('1GB','5')">Buy Now</button></div>
+  <div class="card"><h3>2GB</h3><div class="price">GHS 10</div><button class="btn" onclick="order('2GB','10')">Buy Now</button></div>
+  <div class="card"><h3>3GB</h3><div class="price">GHS 14.5</div><button class="btn" onclick="order('3GB','14.5')">Buy Now</button></div>
+  <div class="card"><h3>4GB</h3><div class="price">GHS 19.5</div><button class="btn" onclick="order('4GB','19.5')">Buy Now</button></div>
+  <div class="card"><h3>5GB</h3><div class="price">GHS 23.5</div><button class="btn" onclick="order('5GB','23.5')">Buy Now</button></div>
+  <div class="card"><h3>6GB</h3><div class="price">GHS 25.5</div><button class="btn" onclick="order('6GB','25.5')">Buy Now</button></div>
+  <div class="card"><h3>8GB</h3><div class="price">GHS 34.5</div><button class="btn" onclick="order('8GB','34.5')">Buy Now</button></div>
+  <div class="card"><h3>10GB</h3><div class="price">GHS 42.5</div><button class="btn" onclick="order('10GB','42.5')">Buy Now</button></div>
+
+  <div class="trust-section">
+    <h2>Why Choose Us</h2>
+    <ul>
+      <li>✅ Instant Delivery</li>
+      <li>✅ Available 24/7</li>
+      <li>✅ Trusted Vendor</li>
+      <li>✅ 100+ Successful Orders</li>
+    </ul>
+  </div>
+
+  <div class="reviews-section">
+    <h2>Customer Reviews</h2>
+
+    <div class="review">
+      ⭐⭐⭐⭐⭐
+      <p>Fast delivery! Highly recommended.</p>
+      <small>– Kwame</small>
+    </div>
+
+    <div class="review">
+      ⭐⭐⭐⭐⭐
+      <p>Trusted vendor, I always get my data in minutes.</p>
+      <small>– Ama</small>
+    </div>
+
+    <div class="review">
+      ⭐⭐⭐⭐⭐
+      <p>Very reliable service. I’ve ordered 10+ times!</p>
+      <small>– Kojo</small>
+    </div>
+  </div>
 
 </div>
 
-<!-- Order Form -->
-<div id="formSection">
+<div class="form-section" id="formSection">
   <h2>Enter Your Details</h2>
-  <input type="text" id="name" placeholder="Your Name"><br>
-  <input type="tel" id="phone" placeholder="Your Phone Number"><br>
-  <button onclick="placeOrder()">Place Order</button>
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="text" id="number" placeholder="Phone Number">
+  <button class="btn" onclick="placeOrder()">Place Order</button>
 </div>
 
 <script>
+  let selectedBundle = "";
+  let selectedPrice = "";
 
-let selectedBundle = "";
-
-function startSite() {
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("mainContent").style.display = "block";
-}
-
-function buyData(bundle) {
-  selectedBundle = bundle;
-  document.getElementById("mainContent").style.display = "none";
-  document.getElementById("formSection").style.display = "block";
-}
-
-function placeOrder() {
-
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-
-  if(name === "" || phone === "") {
-    alert("Please enter your name and phone number");
-    return;
+  function showBundles() {
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("bundles").style.display = "block";
   }
 
-  let message = `Hello, my name is ${name}. I want to buy ${selectedBundle}. My number is ${phone}.`;
+  function order(bundle, price) {
+    selectedBundle = bundle;
+    selectedPrice = price;
+    document.getElementById("formSection").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+  }
 
-  let whatsappNumber = "+233542021230"; // PUT YOUR REAL NUMBER HERE
+  function placeOrder() {
+    let name = document.getElementById("name").value;
+    let number = document.getElementById("number").value;
 
-  let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    if(name === "" || number === "") {
+      alert("Please fill in all details.");
+      return;
+    }
 
-  window.open(url, "_blank");
-}
+    let message = "Hello, I want to buy " + selectedBundle + 
+                  " (GHS " + selectedPrice + ").\n" +
+                  "Name: " + name + "\n" +
+                  "Number: " + number;
 
+    let whatsappURL = "https://wa.me/233542021230?text=" + encodeURIComponent(message);
+    window.location.href = whatsappURL;
+  }
 </script>
 
 </body>
