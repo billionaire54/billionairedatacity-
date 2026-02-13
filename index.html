@@ -44,22 +44,12 @@
       cursor: pointer;
     }
 
-    input, select {
+    input {
       width: 80%;
       padding: 10px;
       margin: 10px;
       border-radius: 8px;
       border: none;
-    }
-
-    .badge {
-      display: inline-block;
-      background: #00ffcc;
-      color: black;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      margin-top: 10px;
     }
 
     .description {
@@ -114,7 +104,7 @@
   </style>
 </head>
 
-<body onload="welcomeMessage()">
+<body>
 
 <div class="container">
 
@@ -122,10 +112,6 @@
   <div id="homeSection">
     <img src="logo.png" alt="Billionaire Data City Logo" class="logo">
     <h2>Welcome to Billionaire Data City</h2>
-
-    <div class="badge">⚡ Instant Delivery Guaranteed</div>
-
-    <br>
     <button onclick="showBundles()">Get Started</button>
 
     <div class="description">
@@ -141,20 +127,22 @@
 
   <!-- BUNDLES -->
   <div id="bundleSection" style="display:none;">
-    <h2>Select Network</h2>
-
-    <select id="network">
-      <option value="MTN">MTN</option>
-      <option value="Telecel">Telecel</option>
-      <option value="AirtelTigo">AirtelTigo</option>
-    </select>
-
     <h2>Available Data Bundles</h2>
 
     <div class="bundle" onclick="selectPlan('1GB = 5gh')">Buy 1GB - 5gh</div>
     <div class="bundle" onclick="selectPlan('2GB = 10gh')">Buy 2GB - 10gh</div>
+    <div class="bundle" onclick="selectPlan('3GB = 14.5gh')">Buy 3GB - 14.5gh</div>
+    <div class="bundle" onclick="selectPlan('4GB = 19.5gh')">Buy 4GB - 19.5gh</div>
     <div class="bundle" onclick="selectPlan('5GB = 23.5gh')">Buy 5GB - 23.5gh</div>
+    <div class="bundle" onclick="selectPlan('6GB = 25.5gh')">Buy 6GB - 25.5gh</div>
+    <div class="bundle" onclick="selectPlan('8GB = 34.5gh')">Buy 8GB - 34.5gh</div>
     <div class="bundle" onclick="selectPlan('10GB = 42.5gh')">Buy 10GB - 42.5gh</div>
+    <div class="bundle" onclick="selectPlan('15GB = 70gh')">Buy 15GB - 70gh</div>
+    <div class="bundle" onclick="selectPlan('20GB = 81gh')">Buy 20GB - 81gh</div>
+    <div class="bundle" onclick="selectPlan('25GB = 101gh')">Buy 25GB - 101gh</div>
+    <div class="bundle" onclick="selectPlan('30GB = 123gh')">Buy 30GB - 123gh</div>
+    <div class="bundle" onclick="selectPlan('40GB = 160gh')">Buy 40GB - 160gh</div>
+    <div class="bundle" onclick="selectPlan('50GB = 210gh')">Buy 50GB - 210gh</div>
 
     <button class="back-btn" onclick="backToHome()">⬅ Back</button>
 
@@ -197,10 +185,6 @@
 
 let chosenPlan = "";
 
-function welcomeMessage() {
-  alert("Welcome to Billionaire Data City 🚀\nInstant Delivery Available!");
-}
-
 function showBundles() {
   document.getElementById("homeSection").style.display = "none";
   document.getElementById("bundleSection").style.display = "block";
@@ -227,7 +211,6 @@ function sendOrder() {
 
   let name = document.getElementById("customerName").value;
   let phone = document.getElementById("customerPhone").value;
-  let network = document.getElementById("network").value;
 
   if(name === "" || phone === "") {
     alert("Please fill all fields");
@@ -238,13 +221,10 @@ function sendOrder() {
 
   setTimeout(function() {
 
-    alert("Order Submitted Successfully ✅");
-
     let message =
       "NEW ORDER%0A" +
       "Name: " + name + "%0A" +
       "Customer Phone: " + phone + "%0A" +
-      "Network: " + network + "%0A" +
       "Bundle: " + chosenPlan;
 
     let url = "https://wa.me/233542021230?text=" + message;
