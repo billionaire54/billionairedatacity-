@@ -93,7 +93,7 @@
 
     .out-stock { font-size: 11px; color: red; }
 
-    /* Popup Styling */
+    /* Confirmation Popup */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -117,8 +117,6 @@
       text-align: center;
       animation: fadeIn 0.3s ease-in-out;
     }
-
-    .popup-box h3 { margin-top: 0; }
 
     .popup-buttons button { margin: 8px; }
 
@@ -194,7 +192,8 @@
     <p id="selectedPlan" style="font-weight:bold;"></p>
 
     <input type="text" id="customerName" placeholder="Enter Your Name">
-    <input type="tel" id="customerPhone" placeholder="Enter Your Phone Number"
+    <input type="tel" id="customerPhone"
+           placeholder="Enter Your Phone Number"
            maxlength="10"
            inputmode="numeric"
            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -217,22 +216,6 @@
     <div class="popup-buttons">
       <button onclick="confirmOrder()">Confirm</button>
       <button class="back-btn" onclick="closePopup()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- MOMO PAYMENT POPUP -->
-<div class="popup-overlay" id="momoPopup">
-  <div class="popup-box">
-    <h3>Mobile Money Payment</h3>
-    <p>Please send payment to:</p>
-    <h2>0542021230</h2>
-    <p><strong>Name:</strong> Billionaire Data City</p>
-    <p id="momoAmount"></p>
-
-    <div class="popup-buttons">
-      <button onclick="completePayment()">I Have Paid</button>
-      <button class="back-btn" onclick="closeMomo()">Cancel</button>
     </div>
   </div>
 </div>
@@ -298,19 +281,8 @@ function sendOrder() {
 function closePopup(){ confirmPopup.style.display="none"; }
 
 function confirmOrder(){
+
   confirmPopup.style.display="none";
-
-  let amount = chosenPlan.split("=")[1].trim();
-  momoAmount.innerHTML="<strong>Amount:</strong> "+amount;
-
-  momoPopup.style.display="flex";
-}
-
-function closeMomo(){ momoPopup.style.display="none"; }
-
-function completePayment(){
-
-  momoPopup.style.display="none";
   loadingText.style.display="block";
 
   let name = customerName.value;
@@ -318,12 +290,11 @@ function completePayment(){
 
   setTimeout(function(){
     let message =
-      "NEW PAID ORDER%0A"+
+      "NEW ORDER%0A"+
       "Name: "+name+"%0A"+
       "Customer Phone: "+phone+"%0A"+
       "Network: "+chosenNetwork+"%0A"+
-      "Bundle: "+chosenPlan+"%0A"+
-      "Status: PAID via MoMo";
+      "Bundle: "+chosenPlan;
 
     window.open("https://wa.me/233542021230?text="+message,"_blank");
     loadingText.style.display="none";
