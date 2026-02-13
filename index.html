@@ -24,12 +24,16 @@
 
     button {
       padding: 12px 25px;
-      margin-top: 20px;
+      margin: 10px;
       background: #00ffcc;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+    }
+
+    .back-btn {
+      background: #ff4d4d;
     }
 
     .bundle {
@@ -83,6 +87,8 @@
     <div class="bundle" onclick="selectPlan('30GB = 123gh')">Buy 30GB - 123gh</div>
     <div class="bundle" onclick="selectPlan('40GB = 160gh')">Buy 40GB - 160gh</div>
     <div class="bundle" onclick="selectPlan('50GB = 210gh')">Buy 50GB - 210gh</div>
+
+    <button class="back-btn" onclick="backToHome()">⬅ Back</button>
   </div>
 
   <!-- ORDER FORM -->
@@ -97,6 +103,8 @@
     <br>
 
     <button onclick="sendOrder()">Place Order</button>
+    <br>
+    <button class="back-btn" onclick="backToBundles()">⬅ Back</button>
   </div>
 
 </div>
@@ -115,6 +123,16 @@ function selectPlan(plan) {
   document.getElementById("bundleSection").style.display = "none";
   document.getElementById("orderSection").style.display = "block";
   document.getElementById("selectedPlan").innerText = "Selected Plan: " + plan;
+}
+
+function backToHome() {
+  document.getElementById("bundleSection").style.display = "none";
+  document.getElementById("homeSection").style.display = "block";
+}
+
+function backToBundles() {
+  document.getElementById("orderSection").style.display = "none";
+  document.getElementById("bundleSection").style.display = "block";
 }
 
 function sendOrder() {
@@ -143,4 +161,4 @@ function sendOrder() {
 </script>
 
 </body>
-</html>
+  </html>
