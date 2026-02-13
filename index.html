@@ -1,161 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Billionaire Data City</title>
+  <title>IreDataCity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f0c29, #302b63);
+      color: white;
+      text-align: center;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #0a0f2c, #11184a);
-    color: white;
-    text-align: center;
-}
+    h1 {
+      padding: 20px;
+    }
 
-.logo-header {
-    padding: 20px 0;
-}
+    .bundle {
+      background: #2b2f77;
+      margin: 15px;
+      padding: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+    }
 
-.logo-header img {
-    width: 220px;
-    max-width: 85%;
-}
+    .bundle:hover {
+      background: #3d42a8;
+    }
 
-button {
-    padding: 12px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 6px;
-    background: #00bfff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    .popup {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+    }
 
-button:hover {
-    background: #009acd;
-}
+    .popup-content {
+      background: #1c1f5c;
+      margin: 20% auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 15px;
+    }
 
-.section {
-    display: none;
-    padding: 20px;
-}
+    .close {
+      color: red;
+      cursor: pointer;
+      font-size: 18px;
+    }
 
-.price-list div {
-    background: #1b2266;
-    margin: 8px auto;
-    padding: 12px;
-    border-radius: 8px;
-    width: 85%;
-}
+    .features {
+      margin-top: 30px;
+      padding: 20px;
+    }
 
-.features, .reviews {
-    margin-top: 30px;
-}
+    .review {
+      background: #1c1f5c;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+    }
 
-.features div, .reviews div {
-    background: #1b2266;
-    margin: 10px auto;
-    padding: 15px;
-    border-radius: 8px;
-    width: 85%;
-}
-input {
-    padding: 10px;
-    width: 80%;
-    border-radius: 6px;
-    border: none;
-}
-</style>
+    .contact {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #00ffcc;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- LOGO -->
-<div class="logo-header">
-    <img src="logo.png" alt="Billionaire Data City Logo">
+<h1>Available Data Bundles</h1>
+
+<div class="bundle" onclick="showPopup('1GB = 5gh')">1GB = 5gh</div>
+<div class="bundle" onclick="showPopup('2GB = 10gh')">2GB = 10gh</div>
+<div class="bundle" onclick="showPopup('3GB = 14.5gh')">3GB = 14.5gh</div>
+<div class="bundle" onclick="showPopup('4GB = 19.5gh')">4GB = 19.5gh</div>
+<div class="bundle" onclick="showPopup('5GB = 23.5gh')">5GB = 23.5gh</div>
+<div class="bundle" onclick="showPopup('6GB = 25.5gh')">6GB = 25.5gh</div>
+<div class="bundle" onclick="showPopup('8GB = 34.5gh')">8GB = 34.5gh</div>
+<div class="bundle" onclick="showPopup('10GB = 42.5gh')">10GB = 42.5gh</div>
+<div class="bundle" onclick="showPopup('15GB = 70gh')">15GB = 70gh</div>
+<div class="bundle" onclick="showPopup('20GB = 81gh')">20GB = 81gh</div>
+<div class="bundle" onclick="showPopup('25GB = 101gh')">25GB = 101gh</div>
+<div class="bundle" onclick="showPopup('30GB = 123gh')">30GB = 123gh</div>
+<div class="bundle" onclick="showPopup('40GB = 160gh')">40GB = 160gh</div>
+<div class="bundle" onclick="showPopup('50GB = 210gh')">50GB = 210gh</div>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">Close ✖</span>
+    <h2 id="selectedBundle"></h2>
+    <p>✅ Instant Delivery</p>
+    <p>📞 Send payment screenshot to:</p>
+    <div class="contact">233542021230</div>
+  </div>
 </div>
 
-<!-- WELCOME -->
-<div id="welcome">
-    <h2>Welcome to Billionaire Data City</h2>
-    <p>Affordable • Fast • Reliable Data Bundles</p>
-    <button onclick="showPrices()">Get Started</button>
+<!-- FEATURES -->
+<div class="features">
+  <h2>Why Choose Us?</h2>
+  <p>⚡ Instant Delivery</p>
+  <p>💯 Trusted Service</p>
+  <p>📱 24/7 Support</p>
 </div>
 
-<!-- PRICE SECTION -->
-<div id="prices" class="section">
-    <h2>Available Data Bundles</h2>
+<!-- REVIEWS -->
+<div class="features">
+  <h2>Customer Reviews</h2>
 
-    <div class="price-list">
-        <div>1GB = 5gh</div>
-        <div>2GB = 10gh</div>
-        <div>3GB = 14.5gh</div>
-        <div>4GB = 19.5gh</div>
-        <div>5GB = 23.5gh</div>
-        <div>6GB = 25.5gh</div>
-        <div>8GB = 34.5gh</div>
-        <div>10GB = 42.5gh</div>
-        <div>15GB = 70gh</div>
-        <div>20GB = 81gh</div>
-        <div>25GB = 101gh</div>
-        <div>30GB = 123gh</div>
-        <div>40GB = 160gh</div>
-        <div>50GB = 210gh</div>
-    </div>
+  <div class="review">
+    ⭐⭐⭐⭐⭐  
+    “Very fast delivery! Highly recommend.”  
+  </div>
 
-    <button onclick="showForm()">Buy Now</button>
+  <div class="review">
+    ⭐⭐⭐⭐⭐  
+    “Got my data in less than 2 minutes.”  
+  </div>
 
-    <!-- WHY CHOOSE US -->
-    <div class="features">
-        <h2>Why Choose Us?</h2>
-        <div>⚡ Instant Delivery</div>
-        <div>💰 Affordable Prices</div>
-        <div>🔒 100% Trusted Service</div>
-        <div>📱 Easy WhatsApp Ordering</div>
-    </div>
-
-    <!-- CUSTOMER REVIEWS -->
-    <div class="reviews">
-        <h2>Customer Reviews</h2>
-        <div>⭐️⭐️⭐️⭐️⭐️ “Fast and reliable service!”</div>
-        <div>⭐️⭐️⭐️⭐️⭐️ “Received my data instantly.”</div>
-        <div>⭐️⭐️⭐️⭐️⭐️ “Best data vendor in town!”</div>
-    </div>
-</div>
-
-<!-- ORDER FORM -->
-<div id="orderForm" class="section">
-    <h2>Place Your Order</h2>
-
-    <input type="text" id="name" placeholder="Your Name" required><br><br>
-    <input type="text" id="number" placeholder="Your Phone Number" required><br><br>
-
-    <button onclick="sendToWhatsApp()">Place Order</button>
+  <div class="review">
+    ⭐⭐⭐⭐⭐  
+    “Reliable and affordable.”  
+  </div>
 </div>
 
 <script>
-function showPrices() {
-    document.getElementById("welcome").style.display = "none";
-    document.getElementById("prices").style.display = "block";
-}
+  function showPopup(bundle) {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("selectedBundle").innerText = bundle;
+  }
 
-function showForm() {
-    document.getElementById("prices").style.display = "none";
-    document.getElementById("orderForm").style.display = "block";
-}
-
-function sendToWhatsApp() {
-    var name = document.getElementById("name").value;
-    var number = document.getElementById("number").value;
-
-    var message = "Hello, I want to buy data.%0AName: " + name + "%0APhone: " + number;
-
-    window.location.href = "https://wa.me/233542021230?text=" + message;
-}
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
 </script>
 
 </body>
