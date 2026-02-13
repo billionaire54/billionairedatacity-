@@ -118,6 +118,44 @@
       color: red;
     }
 
+    /* Confirmation Popup */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .popup-box {
+      background: white;
+      color: black;
+      padding: 25px;
+      border-radius: 12px;
+      width: 85%;
+      max-width: 350px;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .popup-box h3 {
+      margin-top: 0;
+    }
+
+    .popup-buttons button {
+      margin: 8px;
+    }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
   </style>
 </head>
 
@@ -217,6 +255,18 @@
 
 </div>
 
+<!-- Confirmation Popup -->
+<div class="popup-overlay" id="confirmPopup">
+  <div class="popup-box">
+    <h3>Confirm Your Order</h3>
+    <p id="popupDetails"></p>
+    <div class="popup-buttons">
+      <button onclick="confirmOrder()">Confirm</button>
+      <button class="back-btn" onclick="closePopup()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <a href="https://wa.me/233542021230" class="whatsapp-float" target="_blank">
   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
 </a>
@@ -261,21 +311,6 @@ function outOfStock() {
   alert("This network is currently Out of Stock.");
 }
 
-function backToHome() {
-  document.getElementById("bundleSection").style.display = "none";
-  document.getElementById("homeSection").style.display = "block";
-}
-
-function backToBundles() {
-  document.getElementById("networkSection").style.display = "none";
-  document.getElementById("bundleSection").style.display = "block";
-}
-
-function backToNetwork() {
-  document.getElementById("orderSection").style.display = "none";
-  document.getElementById("networkSection").style.display = "block";
-}
-
 function sendOrder() {
   let name = document.getElementById("customerName").value;
   let phone = document.getElementById("customerPhone").value;
@@ -290,6 +325,25 @@ function sendOrder() {
     return;
   }
 
+  let details =
+    "Name: " + name + "<br>" +
+    "Phone: " + phone + "<br>" +
+    "Network: " + chosenNetwork + "<br>" +
+    "Bundle: " + chosenPlan;
+
+  document.getElementById("popupDetails").innerHTML = details;
+  document.getElementById("confirmPopup").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("confirmPopup").style.display = "none";
+}
+
+function confirmOrder() {
+  let name = document.getElementById("customerName").value;
+  let phone = document.getElementById("customerPhone").value;
+
+  document.getElementById("confirmPopup").style.display = "none";
   document.getElementById("loadingText").style.display = "block";
 
   setTimeout(function() {
@@ -305,6 +359,21 @@ function sendOrder() {
 
     document.getElementById("loadingText").style.display = "none";
   }, 1500);
+}
+
+function backToHome() {
+  document.getElementById("bundleSection").style.display = "none";
+  document.getElementById("homeSection").style.display = "block";
+}
+
+function backToBundles() {
+  document.getElementById("networkSection").style.display = "none";
+  document.getElementById("bundleSection").style.display = "block";
+}
+
+function backToNetwork() {
+  document.getElementById("orderSection").style.display = "none";
+  document.getElementById("networkSection").style.display = "block";
 }
 
 </script>
