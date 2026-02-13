@@ -1,69 +1,298 @@
-<div class="bundle" onclick="selectPlan('1GB = 5gh')">
-  Buy 1GB - 5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Billionaire Data City</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f0c29, #302b63);
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    .logo {
+      width: 140px;
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      background: #00ffcc;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .back-btn {
+      background: #ff4d4d;
+    }
+
+    .bundle {
+      background: #2b2f77;
+      margin: 15px;
+      padding: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .description {
+      margin-top: 40px;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    .admin-note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #00ffcc;
+    }
+
+    .admin-note a {
+      color: #00ffcc;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      border-radius: 50%;
+      text-align: center;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+      z-index: 100;
+    }
+
+    .whatsapp-float img {
+      width: 35px;
+      margin-top: 12px;
+    }
+
+    .loader {
+      display: none;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #00ffcc;
+    }
+
+    .no-expiry {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HOME -->
+  <div id="homeSection">
+    <img src="logo.png" alt="Billionaire Data City Logo" class="logo">
+    <h2>Welcome to Billionaire Data City</h2>
+    <button onclick="showBundles()">Get Started</button>
+
+    <div class="description">
+      Affordable & reliable data bundles in Ghana.
+      Fast delivery. Smooth transactions.
+      100% Customer Satisfaction.
+    </div>
+
+    <div class="footer">
+      © 2026 Billionaire Data City
+    </div>
+  </div>
+
+  <!-- BUNDLES -->
+  <div id="bundleSection" style="display:none;">
+    <h2>Available Data Bundles</h2>
+
+    <!-- ALL BUNDLES WITH NO EXPIRY -->
+
+    <div class="bundle" onclick="selectPlan('1GB = 5gh')">
+      Buy 1GB - 5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('2GB = 10gh')">
+      Buy 2GB - 10gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('3GB = 14.5gh')">
+      Buy 3GB - 14.5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('4GB = 19.5gh')">
+      Buy 4GB - 19.5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('5GB = 23.5gh')">
+      Buy 5GB - 23.5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('6GB = 25.5gh')">
+      Buy 6GB - 25.5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('8GB = 34.5gh')">
+      Buy 8GB - 34.5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('10GB = 42.5gh')">
+      Buy 10GB - 42.5gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('15GB = 70gh')">
+      Buy 15GB - 70gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('20GB = 81gh')">
+      Buy 20GB - 81gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('25GB = 101gh')">
+      Buy 25GB - 101gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('30GB = 123gh')">
+      Buy 30GB - 123gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('40GB = 160gh')">
+      Buy 40GB - 160gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <div class="bundle" onclick="selectPlan('50GB = 210gh')">
+      Buy 50GB - 210gh
+      <div class="no-expiry">*No Expiry*</div>
+    </div>
+
+    <button class="back-btn" onclick="backToHome()">⬅ Back</button>
+
+    <div class="admin-note">
+      <strong>
+        DON'T WORRY IF YOU DON'T SEE TYPE OF DATA YOU WANT,<br>
+        JUST CONTACT ADMIN 
+        <a href="https://wa.me/233542021230" target="_blank">
+          233542021230
+        </a>
+      </strong>
+    </div>
+  </div>
+
+  <!-- ORDER SECTION -->
+  <div id="orderSection" style="display:none;">
+    <h2>Complete Your Order</h2>
+
+    <p id="selectedPlan" style="font-weight:bold;"></p>
+
+    <input type="text" id="customerName" placeholder="Enter Your Name">
+    <input type="text" id="customerPhone" placeholder="Enter Your Phone Number">
+
+    <button onclick="sendOrder()">Place Order</button>
+    <button class="back-btn" onclick="backToBundles()">⬅ Back</button>
+
+    <div class="loader" id="loadingText">
+      Processing order... Please wait...
+    </div>
+  </div>
+
 </div>
 
-<div class="bundle" onclick="selectPlan('2GB = 10gh')">
-  Buy 2GB - 10gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/233542021230" class="whatsapp-float" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
 
-<div class="bundle" onclick="selectPlan('3GB = 14.5gh')">
-  Buy 3GB - 14.5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+<script>
+let chosenPlan = "";
 
-<div class="bundle" onclick="selectPlan('4GB = 19.5gh')">
-  Buy 4GB - 19.5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+function showBundles() {
+  document.getElementById("homeSection").style.display = "none";
+  document.getElementById("bundleSection").style.display = "block";
+}
 
-<div class="bundle" onclick="selectPlan('5GB = 23.5gh')">
-  Buy 5GB - 23.5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+function selectPlan(plan) {
+  chosenPlan = plan;
+  document.getElementById("bundleSection").style.display = "none";
+  document.getElementById("orderSection").style.display = "block";
+  document.getElementById("selectedPlan").innerText = "Selected Plan: " + plan;
+}
 
-<div class="bundle" onclick="selectPlan('6GB = 25.5gh')">
-  Buy 6GB - 25.5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+function backToHome() {
+  document.getElementById("bundleSection").style.display = "none";
+  document.getElementById("homeSection").style.display = "block";
+}
 
-<div class="bundle" onclick="selectPlan('8GB = 34.5gh')">
-  Buy 8GB - 34.5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+function backToBundles() {
+  document.getElementById("orderSection").style.display = "none";
+  document.getElementById("bundleSection").style.display = "block";
+}
 
-<div class="bundle" onclick="selectPlan('10GB = 42.5gh')">
-  Buy 10GB - 42.5gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+function sendOrder() {
+  let name = document.getElementById("customerName").value;
+  let phone = document.getElementById("customerPhone").value;
 
-<div class="bundle" onclick="selectPlan('15GB = 70gh')">
-  Buy 15GB - 70gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+  if(name === "" || phone === "") {
+    alert("Please fill all fields");
+    return;
+  }
 
-<div class="bundle" onclick="selectPlan('20GB = 81gh')">
-  Buy 20GB - 81gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+  document.getElementById("loadingText").style.display = "block";
 
-<div class="bundle" onclick="selectPlan('25GB = 101gh')">
-  Buy 25GB - 101gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+  setTimeout(function() {
+    let message =
+      "NEW ORDER%0A" +
+      "Name: " + name + "%0A" +
+      "Customer Phone: " + phone + "%0A" +
+      "Bundle: " + chosenPlan;
 
-<div class="bundle" onclick="selectPlan('30GB = 123gh')">
-  Buy 30GB - 123gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+    let url = "https://wa.me/233542021230?text=" + message;
+    window.open(url, "_blank");
 
-<div class="bundle" onclick="selectPlan('40GB = 160gh')">
-  Buy 40GB - 160gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>
+    document.getElementById("loadingText").style.display = "none";
+  }, 1500);
+}
+</script>
 
-<div class="bundle" onclick="selectPlan('50GB = 210gh')">
-  Buy 50GB - 210gh<br>
-  <small style="opacity:0.7;">*No Expiry*</small>
-</div>>
+</body>
+</html>
