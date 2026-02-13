@@ -55,6 +55,25 @@
       border-radius: 8px;
       border: none;
     }
+
+    .description {
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    .admin-note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #00ffcc;
+    }
   </style>
 </head>
 
@@ -67,6 +86,21 @@
     <img src="logo.png" alt="Billionaire Data City Logo" class="logo">
     <h2>Welcome to Billionaire Data City</h2>
     <button onclick="showBundles()">Get Started</button>
+
+    <div class="description">
+      <p>
+        Billionaire Data City is your trusted plug for affordable and reliable data bundles in Ghana.
+        We provide fast delivery, smooth transactions, and instant confirmation through WhatsApp.
+      </p>
+      <p>
+        Buy MTN, Telecel, and AirtelTigo data at unbeatable prices with 100% customer satisfaction.
+        Your connectivity is our priority.
+      </p>
+    </div>
+
+    <div class="footer">
+      © 2026 Billionaire Data City. All Rights Reserved.
+    </div>
   </div>
 
   <!-- BUNDLES SECTION -->
@@ -89,6 +123,14 @@
     <div class="bundle" onclick="selectPlan('50GB = 210gh')">Buy 50GB - 210gh</div>
 
     <button class="back-btn" onclick="backToHome()">⬅ Back</button>
+
+    <!-- ADMIN MESSAGE -->
+    <div class="admin-note">
+      <strong>
+        DON'T WORRY IF YOU DON'T SEE TYPE OF DATA YOU WANT,<br>
+        JUST CONTACT ADMIN 233542021230
+      </strong>
+    </div>
   </div>
 
   <!-- ORDER FORM -->
@@ -161,4 +203,4 @@ function sendOrder() {
 </script>
 
 </body>
-  </html>
+</html>
