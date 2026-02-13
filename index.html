@@ -13,14 +13,9 @@
       text-align: center;
     }
 
-    .container {
-      padding: 30px;
-    }
+    .container { padding: 30px; }
 
-    .logo {
-      width: 140px;
-      margin-top: 40px;
-    }
+    .logo { width: 140px; margin-top: 40px; }
 
     button {
       padding: 12px 25px;
@@ -32,9 +27,7 @@
       font-size: 16px;
     }
 
-    .back-btn {
-      background: #ff4d4d;
-    }
+    .back-btn { background: #ff4d4d; }
 
     .bundle {
       background: #2b2f77;
@@ -52,17 +45,9 @@
       border: none;
     }
 
-    .description {
-      margin-top: 40px;
-      font-size: 14px;
-      opacity: 0.85;
-    }
+    .description { margin-top: 40px; font-size: 14px; opacity: 0.85; }
 
-    .footer {
-      margin-top: 30px;
-      font-size: 13px;
-      opacity: 0.6;
-    }
+    .footer { margin-top: 30px; font-size: 13px; opacity: 0.6; }
 
     .admin-note {
       margin-top: 20px;
@@ -89,10 +74,7 @@
       z-index: 100;
     }
 
-    .whatsapp-float img {
-      width: 35px;
-      margin-top: 12px;
-    }
+    .whatsapp-float img { width: 35px; margin-top: 12px; }
 
     .loader {
       display: none;
@@ -101,11 +83,7 @@
       color: #00ffcc;
     }
 
-    .no-expiry {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-top: 5px;
-    }
+    .no-expiry { font-size: 12px; opacity: 0.7; margin-top: 5px; }
 
     .network-box {
       display: inline-block;
@@ -113,12 +91,9 @@
       margin: 10px;
     }
 
-    .out-stock {
-      font-size: 11px;
-      color: red;
-    }
+    .out-stock { font-size: 11px; color: red; }
 
-    /* Confirmation Popup */
+    /* Popup Styling */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -143,13 +118,9 @@
       animation: fadeIn 0.3s ease-in-out;
     }
 
-    .popup-box h3 {
-      margin-top: 0;
-    }
+    .popup-box h3 { margin-top: 0; }
 
-    .popup-buttons button {
-      margin: 8px;
-    }
+    .popup-buttons button { margin: 8px; }
 
     @keyframes fadeIn {
       from { transform: scale(0.8); opacity: 0; }
@@ -165,7 +136,7 @@
 
   <!-- HOME -->
   <div id="homeSection">
-    <img src="logo.png" alt="Billionaire Data City Logo" class="logo">
+    <img src="logo.png" class="logo">
     <h2>Welcome to Billionaire Data City</h2>
     <button onclick="showBundles()">Get Started</button>
 
@@ -175,9 +146,7 @@
       100% Customer Satisfaction.
     </div>
 
-    <div class="footer">
-      © 2026 Billionaire Data City
-    </div>
+    <div class="footer">© 2026 Billionaire Data City</div>
   </div>
 
   <!-- BUNDLES -->
@@ -194,21 +163,10 @@
     </script>
 
     <div id="bundleList"></div>
-
     <button class="back-btn" onclick="backToHome()">⬅ Back</button>
-
-    <div class="admin-note">
-      <strong>
-        DON'T WORRY IF YOU DON'T SEE TYPE OF DATA YOU WANT,<br>
-        JUST CONTACT ADMIN 
-        <a href="https://wa.me/233542021230" target="_blank">
-          233542021230
-        </a>
-      </strong>
-    </div>
   </div>
 
-  <!-- NETWORK SECTION -->
+  <!-- NETWORK -->
   <div id="networkSection" style="display:none;">
     <h2>Select Network</h2>
 
@@ -226,7 +184,6 @@
       <div class="out-stock">Out of Stock</div>
     </div>
 
-    <br>
     <button class="back-btn" onclick="backToBundles()">⬅ Back</button>
   </div>
 
@@ -237,10 +194,7 @@
     <p id="selectedPlan" style="font-weight:bold;"></p>
 
     <input type="text" id="customerName" placeholder="Enter Your Name">
-
-    <input type="tel"
-           id="customerPhone"
-           placeholder="Enter Your Phone Number"
+    <input type="tel" id="customerPhone" placeholder="Enter Your Phone Number"
            maxlength="10"
            inputmode="numeric"
            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -267,6 +221,22 @@
   </div>
 </div>
 
+<!-- MOMO PAYMENT POPUP -->
+<div class="popup-overlay" id="momoPopup">
+  <div class="popup-box">
+    <h3>Mobile Money Payment</h3>
+    <p>Please send payment to:</p>
+    <h2>0542021230</h2>
+    <p><strong>Name:</strong> Billionaire Data City</p>
+    <p id="momoAmount"></p>
+
+    <div class="popup-buttons">
+      <button onclick="completePayment()">I Have Paid</button>
+      <button class="back-btn" onclick="closeMomo()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <a href="https://wa.me/233542021230" class="whatsapp-float" target="_blank">
   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
 </a>
@@ -280,30 +250,27 @@ const bundleContainer = document.getElementById("bundleList");
 bundles.forEach(plan => {
   const div = document.createElement("div");
   div.className = "bundle";
-  div.innerHTML = `
-    Buy ${plan}
-    <div class="no-expiry">*No Expiry*</div>
-  `;
+  div.innerHTML = `Buy ${plan}<div class="no-expiry">*No Expiry*</div>`;
   div.onclick = () => selectPlan(plan);
   bundleContainer.appendChild(div);
 });
 
 function showBundles() {
-  document.getElementById("homeSection").style.display = "none";
-  document.getElementById("bundleSection").style.display = "block";
+  homeSection.style.display="none";
+  bundleSection.style.display="block";
 }
 
 function selectPlan(plan) {
   chosenPlan = plan;
-  document.getElementById("bundleSection").style.display = "none";
-  document.getElementById("networkSection").style.display = "block";
+  bundleSection.style.display="none";
+  networkSection.style.display="block";
 }
 
 function selectNetwork(network) {
   chosenNetwork = network;
-  document.getElementById("networkSection").style.display = "none";
-  document.getElementById("orderSection").style.display = "block";
-  document.getElementById("selectedPlan").innerText =
+  networkSection.style.display="none";
+  orderSection.style.display="block";
+  selectedPlan.innerText =
     "Selected Plan: " + chosenPlan + " | Network: " + chosenNetwork;
 }
 
@@ -312,69 +279,60 @@ function outOfStock() {
 }
 
 function sendOrder() {
-  let name = document.getElementById("customerName").value;
-  let phone = document.getElementById("customerPhone").value;
 
-  if(name === "" || phone === "") {
-    alert("Please fill all fields");
-    return;
-  }
+  let name = customerName.value;
+  let phone = customerPhone.value;
 
-  if(phone.length !== 10) {
-    alert("Phone number must be 10 digits");
-    return;
-  }
+  if(name===""||phone===""){ alert("Please fill all fields"); return; }
+  if(phone.length!==10){ alert("Phone number must be 10 digits"); return; }
 
-  let details =
-    "Name: " + name + "<br>" +
-    "Phone: " + phone + "<br>" +
-    "Network: " + chosenNetwork + "<br>" +
-    "Bundle: " + chosenPlan;
+  popupDetails.innerHTML =
+    "Name: "+name+"<br>"+
+    "Phone: "+phone+"<br>"+
+    "Network: "+chosenNetwork+"<br>"+
+    "Bundle: "+chosenPlan;
 
-  document.getElementById("popupDetails").innerHTML = details;
-  document.getElementById("confirmPopup").style.display = "flex";
+  confirmPopup.style.display="flex";
 }
 
-function closePopup() {
-  document.getElementById("confirmPopup").style.display = "none";
+function closePopup(){ confirmPopup.style.display="none"; }
+
+function confirmOrder(){
+  confirmPopup.style.display="none";
+
+  let amount = chosenPlan.split("=")[1].trim();
+  momoAmount.innerHTML="<strong>Amount:</strong> "+amount;
+
+  momoPopup.style.display="flex";
 }
 
-function confirmOrder() {
-  let name = document.getElementById("customerName").value;
-  let phone = document.getElementById("customerPhone").value;
+function closeMomo(){ momoPopup.style.display="none"; }
 
-  document.getElementById("confirmPopup").style.display = "none";
-  document.getElementById("loadingText").style.display = "block";
+function completePayment(){
 
-  setTimeout(function() {
+  momoPopup.style.display="none";
+  loadingText.style.display="block";
+
+  let name = customerName.value;
+  let phone = customerPhone.value;
+
+  setTimeout(function(){
     let message =
-      "NEW ORDER%0A" +
-      "Name: " + name + "%0A" +
-      "Customer Phone: " + phone + "%0A" +
-      "Network: " + chosenNetwork + "%0A" +
-      "Bundle: " + chosenPlan;
+      "NEW PAID ORDER%0A"+
+      "Name: "+name+"%0A"+
+      "Customer Phone: "+phone+"%0A"+
+      "Network: "+chosenNetwork+"%0A"+
+      "Bundle: "+chosenPlan+"%0A"+
+      "Status: PAID via MoMo";
 
-    let url = "https://wa.me/233542021230?text=" + message;
-    window.open(url, "_blank");
-
-    document.getElementById("loadingText").style.display = "none";
-  }, 1500);
+    window.open("https://wa.me/233542021230?text="+message,"_blank");
+    loadingText.style.display="none";
+  },1500);
 }
 
-function backToHome() {
-  document.getElementById("bundleSection").style.display = "none";
-  document.getElementById("homeSection").style.display = "block";
-}
-
-function backToBundles() {
-  document.getElementById("networkSection").style.display = "none";
-  document.getElementById("bundleSection").style.display = "block";
-}
-
-function backToNetwork() {
-  document.getElementById("orderSection").style.display = "none";
-  document.getElementById("networkSection").style.display = "block";
-}
+function backToHome(){ bundleSection.style.display="none"; homeSection.style.display="block"; }
+function backToBundles(){ networkSection.style.display="none"; bundleSection.style.display="block"; }
+function backToNetwork(){ orderSection.style.display="none"; networkSection.style.display="block"; }
 
 </script>
 
