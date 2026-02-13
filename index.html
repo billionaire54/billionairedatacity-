@@ -1,211 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Billionaire Data City</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire Data City</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1220;
-      color: white;
-      text-align: center;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0a0f2c;
+    color: white;
+    text-align: center;
+}
 
-    h1 {
-      padding: 20px;
-      color: #00bfff;
-    }
+.logo-header {
+    padding: 20px 0;
+}
 
-    .welcome {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+.logo-header img {
+    width: 220px;
+    max-width: 80%;
+}
 
-    .btn {
-      background: #00bfff;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-    }
+h2 {
+    margin-top: 10px;
+}
 
-    .btn:hover {
-      opacity: 0.8;
-    }
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #00bfff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-    .bundles {
-      display: none;
-      padding: 20px;
-    }
+button:hover {
+    background: #009acd;
+}
 
-    .card {
-      background: #111a2e;
-      margin: 10px auto;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 320px;
-    }
+.section {
+    display: none;
+    padding: 20px;
+}
 
-    .price {
-      color: #00ffcc;
-      font-size: 20px;
-      margin: 10px 0;
-    }
-
-    .form-section {
-      display: none;
-      padding: 20px;
-    }
-
-    input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-    }
-
-    .trust-section, .reviews-section {
-      padding: 40px 20px;
-    }
-
-    .trust-section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .trust-section li {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-
-    .review {
-      background: #111a2e;
-      padding: 15px;
-      margin: 15px auto;
-      border-radius: 8px;
-      max-width: 320px;
-    }
-
-  </style>
+.price-list div {
+    background: #11184a;
+    margin: 8px auto;
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Billionaire Data City</h1>
-
-<!-- WELCOME -->
-<div class="welcome" id="welcome">
-  <h2>WELCOME TO BILLIONAIRE'S DATA CITY</h2>
-  <p>Fast • Reliable • Affordable Data Services</p>
-  <button class="btn" onclick="showBundles()">Get Started</button>
+<!-- LOGO -->
+<div class="logo-header">
+    <img src="logo.png" alt="Billionaire Data City Logo">
 </div>
 
-<!-- BUNDLES -->
-<div class="bundles" id="bundles">
-
-  <h2>Buy MTN Data Bundles</h2>
-
-  <div class="card"><h3>1GB</h3><div class="price">GHS 5</div><button class="btn" onclick="order('1GB','5')">Buy Now</button></div>
-  <div class="card"><h3>2GB</h3><div class="price">GHS 10</div><button class="btn" onclick="order('2GB','10')">Buy Now</button></div>
-  <div class="card"><h3>3GB</h3><div class="price">GHS 14.5</div><button class="btn" onclick="order('3GB','14.5')">Buy Now</button></div>
-  <div class="card"><h3>4GB</h3><div class="price">GHS 19.5</div><button class="btn" onclick="order('4GB','19.5')">Buy Now</button></div>
-  <div class="card"><h3>5GB</h3><div class="price">GHS 23.5</div><button class="btn" onclick="order('5GB','23.5')">Buy Now</button></div>
-  <div class="card"><h3>6GB</h3><div class="price">GHS 25.5</div><button class="btn" onclick="order('6GB','25.5')">Buy Now</button></div>
-  <div class="card"><h3>8GB</h3><div class="price">GHS 34.5</div><button class="btn" onclick="order('8GB','34.5')">Buy Now</button></div>
-  <div class="card"><h3>10GB</h3><div class="price">GHS 42.5</div><button class="btn" onclick="order('10GB','42.5')">Buy Now</button></div>
-  <div class="card"><h3>15GB</h3><div class="price">GHS 70</div><button class="btn" onclick="order('15GB','70')">Buy Now</button></div>
-  <div class="card"><h3>20GB</h3><div class="price">GHS 81</div><button class="btn" onclick="order('20GB','81')">Buy Now</button></div>
-  <div class="card"><h3>25GB</h3><div class="price">GHS 101</div><button class="btn" onclick="order('25GB','101')">Buy Now</button></div>
-  <div class="card"><h3>30GB</h3><div class="price">GHS 123</div><button class="btn" onclick="order('30GB','123')">Buy Now</button></div>
-  <div class="card"><h3>40GB</h3><div class="price">GHS 160</div><button class="btn" onclick="order('40GB','160')">Buy Now</button></div>
-  <div class="card"><h3>50GB</h3><div class="price">GHS 210</div><button class="btn" onclick="order('50GB','210')">Buy Now</button></div>
-
-  <!-- TRUST SECTION -->
-  <div class="trust-section">
-    <h2>Why Choose Us</h2>
-    <ul>
-      <li>✅ Instant Delivery</li>
-      <li>✅ Available 24/7</li>
-      <li>✅ Trusted Vendor</li>
-      <li>✅ 100+ Successful Orders</li>
-    </ul>
-  </div>
-
-  <!-- REVIEWS -->
-  <div class="reviews-section">
-    <h2>Customer Reviews</h2>
-
-    <div class="review">
-      ⭐⭐⭐⭐⭐
-      <p>Fast delivery! Highly recommended.</p>
-      <small>– Kwame</small>
-    </div>
-
-    <div class="review">
-      ⭐⭐⭐⭐⭐
-      <p>Trusted vendor, I always get my data in minutes.</p>
-      <small>– Ama</small>
-    </div>
-
-    <div class="review">
-      ⭐⭐⭐⭐⭐
-      <p>Very reliable service. I’ve ordered 10+ times!</p>
-      <small>– Kojo</small>
-    </div>
-  </div>
-
+<!-- WELCOME SECTION -->
+<div id="welcome">
+    <h2>Welcome to Billionaire Data City</h2>
+    <p>Affordable & Instant Data Bundles</p>
+    <button onclick="showPrices()">Get Started</button>
 </div>
 
-<!-- FORM -->
-<div class="form-section" id="formSection">
-  <h2>Enter Your Details</h2>
-  <input type="text" id="name" placeholder="Your Name">
-  <input type="text" id="number" placeholder="Phone Number">
-  <button class="btn" onclick="placeOrder()">Place Order</button>
+<!-- PRICE LIST SECTION -->
+<div id="prices" class="section">
+    <h2>Available Data Bundles</h2>
+
+    <div class="price-list">
+        <div>1GB = 5gh</div>
+        <div>2GB = 10gh</div>
+        <div>3GB = 14.5gh</div>
+        <div>4GB = 19.5gh</div>
+        <div>5GB = 23.5gh</div>
+        <div>6GB = 25.5gh</div>
+        <div>8GB = 34.5gh</div>
+        <div>10GB = 42.5gh</div>
+        <div>15GB = 70gh</div>
+        <div>20GB = 81gh</div>
+        <div>25GB = 101gh</div>
+        <div>30GB = 123gh</div>
+        <div>40GB = 160gh</div>
+        <div>50GB = 210gh</div>
+    </div>
+
+    <button onclick="showForm()">Buy Now</button>
+</div>
+
+<!-- ORDER FORM -->
+<div id="orderForm" class="section">
+    <h2>Place Your Order</h2>
+
+    <input type="text" id="name" placeholder="Your Name" required><br><br>
+    <input type="text" id="number" placeholder="Your Phone Number" required><br><br>
+
+    <button onclick="sendToWhatsApp()">Place Order</button>
 </div>
 
 <script>
-  let selectedBundle = "";
-  let selectedPrice = "";
-
-  function showBundles() {
+function showPrices() {
     document.getElementById("welcome").style.display = "none";
-    document.getElementById("bundles").style.display = "block";
-  }
+    document.getElementById("prices").style.display = "block";
+}
 
-  function order(bundle, price) {
-    selectedBundle = bundle;
-    selectedPrice = price;
-    document.getElementById("formSection").style.display = "block";
-    window.scrollTo(0, document.body.scrollHeight);
-  }
+function showForm() {
+    document.getElementById("prices").style.display = "none";
+    document.getElementById("orderForm").style.display = "block";
+}
 
-  function placeOrder() {
-    let name = document.getElementById("name").value;
-    let number = document.getElementById("number").value;
+function sendToWhatsApp() {
+    var name = document.getElementById("name").value;
+    var number = document.getElementById("number").value;
 
-    if(name === "" || number === "") {
-      alert("Please fill in all details.");
-      return;
-    }
+    var message = "Hello, I want to buy data.%0AName: " + name + "%0APhone: " + number;
 
-    let message = "Hello, I want to buy " + selectedBundle + 
-                  " (GHS " + selectedPrice + ").\n" +
-                  "Name: " + name + "\n" +
-                  "Number: " + number;
-
-    let whatsappURL = "https://wa.me/233542021230?text=" + encodeURIComponent(message);
-    window.location.href = whatsappURL;
-  }
+    window.location.href = "https://wa.me/233542021230?text=" + message;
+}
 </script>
 
 </body>
