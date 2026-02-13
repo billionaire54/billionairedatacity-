@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0a0f2c;
+    background: linear-gradient(to bottom, #0a0f2c, #11184a);
     color: white;
     text-align: center;
 }
@@ -20,22 +20,19 @@ body {
 
 .logo-header img {
     width: 220px;
-    max-width: 80%;
-}
-
-h2 {
-    margin-top: 10px;
+    max-width: 85%;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     margin: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     background: #00bfff;
     color: white;
-    cursor: pointer;
     font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
@@ -48,11 +45,29 @@ button:hover {
 }
 
 .price-list div {
-    background: #11184a;
+    background: #1b2266;
     margin: 8px auto;
+    padding: 12px;
+    border-radius: 8px;
+    width: 85%;
+}
+
+.features, .reviews {
+    margin-top: 30px;
+}
+
+.features div, .reviews div {
+    background: #1b2266;
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 8px;
+    width: 85%;
+}
+input {
     padding: 10px;
-    border-radius: 5px;
     width: 80%;
+    border-radius: 6px;
+    border: none;
 }
 </style>
 </head>
@@ -64,14 +79,14 @@ button:hover {
     <img src="logo.png" alt="Billionaire Data City Logo">
 </div>
 
-<!-- WELCOME SECTION -->
+<!-- WELCOME -->
 <div id="welcome">
     <h2>Welcome to Billionaire Data City</h2>
-    <p>Affordable & Instant Data Bundles</p>
+    <p>Affordable • Fast • Reliable Data Bundles</p>
     <button onclick="showPrices()">Get Started</button>
 </div>
 
-<!-- PRICE LIST SECTION -->
+<!-- PRICE SECTION -->
 <div id="prices" class="section">
     <h2>Available Data Bundles</h2>
 
@@ -93,6 +108,23 @@ button:hover {
     </div>
 
     <button onclick="showForm()">Buy Now</button>
+
+    <!-- WHY CHOOSE US -->
+    <div class="features">
+        <h2>Why Choose Us?</h2>
+        <div>⚡ Instant Delivery</div>
+        <div>💰 Affordable Prices</div>
+        <div>🔒 100% Trusted Service</div>
+        <div>📱 Easy WhatsApp Ordering</div>
+    </div>
+
+    <!-- CUSTOMER REVIEWS -->
+    <div class="reviews">
+        <h2>Customer Reviews</h2>
+        <div>⭐️⭐️⭐️⭐️⭐️ “Fast and reliable service!”</div>
+        <div>⭐️⭐️⭐️⭐️⭐️ “Received my data instantly.”</div>
+        <div>⭐️⭐️⭐️⭐️⭐️ “Best data vendor in town!”</div>
+    </div>
 </div>
 
 <!-- ORDER FORM -->
