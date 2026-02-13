@@ -14,7 +14,6 @@
     }
 
     .container { padding: 30px; }
-
     .logo { width: 140px; margin-top: 40px; }
 
     button {
@@ -45,44 +44,6 @@
       border: none;
     }
 
-    .description { margin-top: 40px; font-size: 14px; opacity: 0.85; }
-
-    .footer { margin-top: 30px; font-size: 13px; opacity: 0.6; }
-
-    .admin-note {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #00ffcc;
-    }
-
-    .admin-note a {
-      color: #00ffcc;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
-    .whatsapp-float {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      border-radius: 50%;
-      text-align: center;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
-      z-index: 100;
-    }
-
-    .whatsapp-float img { width: 35px; margin-top: 12px; }
-
-    .loader {
-      display: none;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #00ffcc;
-    }
-
     .no-expiry { font-size: 12px; opacity: 0.7; margin-top: 5px; }
 
     .network-box {
@@ -93,13 +54,18 @@
 
     .out-stock { font-size: 11px; color: red; }
 
+    .loader {
+      display: none;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #00ffcc;
+    }
+
     /* Confirmation Popup */
     .popup-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
       display: none;
       justify-content: center;
@@ -115,23 +81,13 @@
       width: 85%;
       max-width: 350px;
       text-align: center;
-      animation: fadeIn 0.3s ease-in-out;
     }
 
-    .popup-buttons button { margin: 8px; }
-
-    @keyframes fadeIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    /* SUCCESS POPUP */
+    /* Success Popup */
     .success-popup {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
       display: none;
       justify-content: center;
@@ -147,24 +103,29 @@
       text-align: center;
       width: 85%;
       max-width: 350px;
-      animation: popUp 0.4s ease-in-out;
     }
 
     .success-check {
       font-size: 50px;
       color: #00cc66;
-      animation: bounce 0.6s ease;
     }
 
-    @keyframes popUp {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    /* Reviews */
+    .reviews {
+      background: #f8f9fa;
+      padding: 25px;
+      margin-top: 40px;
+      border-radius: 15px;
+      text-align: center;
+      color: black;
     }
 
-    @keyframes bounce {
-      0% { transform: scale(0.5); }
-      60% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    .review-box {
+      background: white;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 12px;
+      font-size: 14px;
     }
 
   </style>
@@ -179,29 +140,11 @@
     <img src="logo.png" class="logo">
     <h2>Welcome to Billionaire Data City</h2>
     <button onclick="showBundles()">Get Started</button>
-
-    <div class="description">
-      Affordable & reliable data bundles in Ghana.
-      Fast delivery. Smooth transactions.
-      100% Customer Satisfaction.
-    </div>
-
-    <div class="footer">© 2026 Billionaire Data City</div>
   </div>
 
   <!-- BUNDLES -->
   <div id="bundleSection" style="display:none;">
     <h2>Available Data Bundles</h2>
-
-    <script>
-      const bundles = [
-        "1GB = 5gh","2GB = 10gh","3GB = 14.5gh","4GB = 19.5gh",
-        "5GB = 23.5gh","6GB = 25.5gh","8GB = 34.5gh","10GB = 42.5gh",
-        "15GB = 70gh","20GB = 81gh","25GB = 101gh","30GB = 123gh",
-        "40GB = 160gh","50GB = 210gh"
-      ];
-    </script>
-
     <div id="bundleList"></div>
     <button class="back-btn" onclick="backToHome()">⬅ Back</button>
   </div>
@@ -231,21 +174,15 @@
   <div id="orderSection" style="display:none;">
     <h2>Complete Your Order</h2>
 
-    <p id="selectedPlan" style="font-weight:bold;"></p>
+    <p id="selectedPlan"></p>
 
     <input type="text" id="customerName" placeholder="Enter Your Name">
-    <input type="tel" id="customerPhone"
-           placeholder="Enter Your Phone Number"
-           maxlength="10"
-           inputmode="numeric"
-           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+    <input type="tel" id="customerPhone" placeholder="Enter Phone Number" maxlength="10">
 
     <button onclick="sendOrder()">Place Order</button>
     <button class="back-btn" onclick="backToNetwork()">⬅ Back</button>
 
-    <div class="loader" id="loadingText">
-      Processing order... Please wait...
-    </div>
+    <div class="loader" id="loadingText">Processing order...</div>
   </div>
 
 </div>
@@ -255,33 +192,32 @@
   <div class="popup-box">
     <h3>Confirm Your Order</h3>
     <p id="popupDetails"></p>
-    <div class="popup-buttons">
-      <button onclick="confirmOrder()">Confirm</button>
-      <button class="back-btn" onclick="closePopup()">Cancel</button>
-    </div>
+    <button onclick="confirmOrder()">Confirm</button>
+    <button class="back-btn" onclick="closePopup()">Cancel</button>
   </div>
 </div>
 
-<!-- SUCCESS POPUP -->
+<!-- Success Popup -->
 <div class="success-popup" id="successPopup">
   <div class="success-box">
     <div class="success-check">✔</div>
     <h3>Order Sent Successfully!</h3>
-    <p>Please wait while we process your request.</p>
     <button onclick="closeSuccess()">Close</button>
   </div>
 </div>
-
-<a href="https://wa.me/233542021230" class="whatsapp-float" target="_blank">
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-</a>
 
 <script>
 
 let chosenPlan = "";
 let chosenNetwork = "";
 
+const bundles = [
+"1GB = 5gh","2GB = 10gh","3GB = 14.5gh","4GB = 19.5gh",
+"5GB = 23.5gh","6GB = 25.5gh","8GB = 34.5gh","10GB = 42.5gh"
+];
+
 const bundleContainer = document.getElementById("bundleList");
+
 bundles.forEach(plan => {
   const div = document.createElement("div");
   div.className = "bundle";
@@ -290,47 +226,51 @@ bundles.forEach(plan => {
   bundleContainer.appendChild(div);
 });
 
-function showBundles() {
+function showBundles(){
   homeSection.style.display="none";
   bundleSection.style.display="block";
 }
 
-function selectPlan(plan) {
+function selectPlan(plan){
   chosenPlan = plan;
   bundleSection.style.display="none";
   networkSection.style.display="block";
 }
 
-function selectNetwork(network) {
+function selectNetwork(network){
   chosenNetwork = network;
   networkSection.style.display="none";
   orderSection.style.display="block";
   selectedPlan.innerText =
-    "Selected Plan: " + chosenPlan + " | Network: " + chosenNetwork;
+  "Selected Plan: " + chosenPlan + " | Network: " + chosenNetwork;
 }
 
-function outOfStock() {
+function outOfStock(){
   alert("This network is currently Out of Stock.");
 }
 
-function sendOrder() {
+function sendOrder(){
 
   let name = customerName.value;
   let phone = customerPhone.value;
 
-  if(name===""||phone===""){ alert("Please fill all fields"); return; }
-  if(phone.length!==10){ alert("Phone number must be 10 digits"); return; }
+  if(name==="" || phone===""){
+    alert("Please fill all fields");
+    return;
+  }
 
   popupDetails.innerHTML =
-    "Name: "+name+"<br>"+
-    "Phone: "+phone+"<br>"+
-    "Network: "+chosenNetwork+"<br>"+
-    "Bundle: "+chosenPlan;
+  "Name: "+name+"<br>"+
+  "Phone: "+phone+"<br>"+
+  "Network: "+chosenNetwork+"<br>"+
+  "Bundle: "+chosenPlan;
 
   confirmPopup.style.display="flex";
 }
 
-function closePopup(){ confirmPopup.style.display="none"; }
+function closePopup(){
+  confirmPopup.style.display="none";
+}
 
 function confirmOrder(){
 
@@ -340,27 +280,43 @@ function confirmOrder(){
   let name = customerName.value;
   let phone = customerPhone.value;
 
-  setTimeout(function(){
-    let message =
-      "NEW ORDER%0A"+
-      "Name: "+name+"%0A"+
-      "Customer Phone: "+phone+"%0A"+
-      "Network: "+chosenNetwork+"%0A"+
-      "Bundle: "+chosenPlan;
+  let message =
+  "NEW ORDER\n"+
+  "Name: "+name+"\n"+
+  "Phone: "+phone+"\n"+
+  "Network: "+chosenNetwork+"\n"+
+  "Bundle: "+chosenPlan;
 
-    window.open("https://wa.me/233542021230?text="+message,"_blank");
+  setTimeout(function(){
+
+    // ✅ SMS instead of WhatsApp
+    window.location.href =
+    "sms:0542021230?body=" + encodeURIComponent(message);
+
     loadingText.style.display="none";
     successPopup.style.display="flex";
-  },1500);
+
+  },1000);
 }
 
 function closeSuccess(){
   successPopup.style.display="none";
 }
 
-function backToHome(){ bundleSection.style.display="none"; homeSection.style.display="block"; }
-function backToBundles(){ networkSection.style.display="none"; bundleSection.style.display="block"; }
-function backToNetwork(){ orderSection.style.display="none"; networkSection.style.display="block"; }
+function backToHome(){
+  bundleSection.style.display="none";
+  homeSection.style.display="block";
+}
+
+function backToBundles(){
+  networkSection.style.display="none";
+  bundleSection.style.display="block";
+}
+
+function backToNetwork(){
+  orderSection.style.display="none";
+  networkSection.style.display="block";
+}
 
 </script>
 
