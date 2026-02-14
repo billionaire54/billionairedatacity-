@@ -1,361 +1,151 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Billionaire Data City</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire Data City</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #0f0c29, #302b63);
-      color: white;
-      text-align: center;
-    }
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:0;
+    text-align:center;
+}
 
-    .container { padding: 30px; }
-    .logo { width: 140px; margin-top: 40px; }
+h1{
+    background:#0a3d62;
+    color:white;
+    padding:15px;
+}
 
-    button {
-      padding: 12px 25px;
-      margin: 10px;
-      background: #00ffcc;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:20px;
+}
 
-    .back-btn { background: #ff4d4d; }
+.bundle{
+    background:white;
+    margin:10px;
+    padding:15px;
+    width:180px;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
 
-    .bundle {
-      background: #2b2f77;
-      margin: 15px;
-      padding: 18px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
+.bundle h3{
+    margin:10px 0;
+}
 
-    input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 8px;
-      border: none;
-    }
+.bundle button{
+    background:#0a3d62;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:5px;
+    cursor:pointer;
+}
 
-    .no-expiry { font-size: 12px; opacity: 0.7; margin-top: 5px; }
+.bundle button:hover{
+    background:#074173;
+}
 
-    .network-box {
-      display: inline-block;
-      margin: 10px;
-    }
+/* Admin Message Box */
+.admin-message{
+    margin:25px auto;
+    padding:15px;
+    width:80%;
+    background:#fff3cd;
+    color:#856404;
+    border-radius:8px;
+    font-weight:bold;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
 
-    .out-stock { font-size: 11px; color: red; }
-
-    .loader {
-      display: none;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #00ffcc;
-    }
-
-    /* Confirmation Popup */
-    .popup-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-    }
-
-    .popup-box {
-      background: white;
-      color: black;
-      padding: 25px;
-      border-radius: 12px;
-      width: 85%;
-      max-width: 350px;
-      text-align: center;
-    }
-
-    /* Success Popup */
-    .success-popup {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 300;
-    }
-
-    .success-box {
-      background: white;
-      color: black;
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      width: 85%;
-      max-width: 350px;
-    }
-
-    .success-check {
-      font-size: 50px;
-      color: #00cc66;
-    }
-
-    /* Reviews */
-    .reviews {
-      background: #f8f9fa;
-      padding: 25px;
-      margin-top: 40px;
-      border-radius: 15px;
-      text-align: center;
-      color: black;
-    }
-
-    .review-box {
-      background: white;
-      padding: 15px;
-      margin: 12px 0;
-      border-radius: 12px;
-      font-size: 14px;
-    }
-
-    /* Floating WhatsApp */
-    .floating-whatsapp {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    .floating-whatsapp img {
-      width: 100%;
-      height: 100%;
-    }
-
-  </style>
+/* Floating WhatsApp */
+.whatsapp-float{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    font-size:22px;
+    padding:12px 15px;
+    border-radius:50%;
+    text-decoration:none;
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+}
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<h1>Welcome to Billionaire Data City</h1>
 
-  <!-- HOME -->
-  <div id="homeSection">
-    <img src="logo.png" class="logo">
-    <h2>Welcome to Billionaire Data City</h2>
-    <button onclick="showBundles()">Get Started</button>
-  </div>
+<div class="container" id="bundleContainer"></div>
 
-  <!-- BUNDLES -->
-  <div id="bundleSection" style="display:none;">
-    <h2>Available Data Bundles</h2>
-    <div id="bundleList"></div>
-    <button class="back-btn" onclick="backToHome()">⬅ Back</button>
-  </div>
-
-  <!-- NETWORK -->
-  <div id="networkSection" style="display:none;">
-    <h2>Select Network</h2>
-
-    <div class="network-box">
-      <button onclick="selectNetwork('MTN')">MTN</button>
-    </div>
-
-    <div class="network-box">
-      <button onclick="outOfStock()">Telecel</button>
-      <div class="out-stock">Out of Stock</div>
-    </div>
-
-    <div class="network-box">
-      <button onclick="outOfStock()">AT</button>
-      <div class="out-stock">Out of Stock</div>
-    </div>
-
-    <button class="back-btn" onclick="backToBundles()">⬅ Back</button>
-  </div>
-
-  <!-- ORDER -->
-  <div id="orderSection" style="display:none;">
-    <h2>Complete Your Order</h2>
-    <p id="selectedPlan"></p>
-
-    <input type="text" id="customerName" placeholder="Enter Your Name">
-    <input type="tel" id="customerPhone" placeholder="Enter Phone Number" maxlength="10">
-
-    <button onclick="sendOrder()">Place Order</button>
-    <button class="back-btn" onclick="backToNetwork()">⬅ Back</button>
-
-    <div class="loader" id="loadingText">Processing order...</div>
-  </div>
-
-  <!-- REVIEWS -->
-  <div class="reviews">
-    <h2>⭐ Trusted by Our Customers</h2>
-
-    <div class="review-box">
-      <p>“Fast delivery! Got my data in 5 minutes.”</p>
-      <strong>- Kwame A.</strong>
-    </div>
-
-    <div class="review-box">
-      <p>“Very reliable. I always buy from Billionaire Data City.”</p>
-      <strong>- Sandra M.</strong>
-    </div>
-
-    <div class="review-box">
-      <p>“Affordable prices and no expiry. Highly recommend!”</p>
-      <strong>- Emmanuel K.</strong>
-    </div>
-
-    <p>⭐ 4.9/5 Rating from 1,200+ happy customers</p>
-  </div>
-
+<!-- Admin Notice -->
+<div class="admin-message">
+⚠️ DON'T WORRY IF YOU DON'T SEE TYPE OF DATA YOU WANT, JUST CONTACT ADMIN
 </div>
 
-<!-- Confirmation Popup -->
-<div class="popup-overlay" id="confirmPopup">
-  <div class="popup-box">
-    <h3>Confirm Your Order</h3>
-    <p id="popupDetails"></p>
-    <button onclick="confirmOrder()">Confirm</button>
-    <button class="back-btn" onclick="closePopup()">Cancel</button>
-  </div>
-</div>
-
-<!-- Success Popup -->
-<div class="success-popup" id="successPopup">
-  <div class="success-box">
-    <div class="success-check">✔</div>
-    <h3>Order Sent Successfully!</h3>
-    <button onclick="closeSuccess()">Close</button>
-  </div>
-</div>
-
-<!-- Floating WhatsApp -->
-<a href="https://wa.me/233542021230" target="_blank" class="floating-whatsapp">
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+<!-- Floating WhatsApp Icon -->
+<a href="https://wa.me/233542021230" class="whatsapp-float" target="_blank">
+💬
 </a>
 
 <script>
 
-let chosenPlan = "";
-let chosenNetwork = "";
-
+// FULL BUNDLE LIST 1GB - 50GB
 const bundles = [
-"1GB = 5gh","2GB = 10gh","3GB = 14.5gh","4GB = 19.5gh",
-"5GB = 23.5gh","6GB = 25.5gh","8GB = 34.5gh","10GB = 42.5gh"
+"1GB = 5gh",
+"2GB = 10gh",
+"3GB = 14.5gh",
+"4GB = 19.5gh",
+"5GB = 23.5gh",
+"6GB = 25.5gh",
+"7GB = 30gh",
+"8GB = 34.5gh",
+"9GB = 38gh",
+"10GB = 42.5gh",
+"15GB = 60gh",
+"20GB = 80gh",
+"25GB = 100gh",
+"30GB = 120gh",
+"35GB = 140gh",
+"40GB = 155gh",
+"45GB = 170gh",
+"50GB = 190gh"
 ];
 
-const bundleContainer = document.getElementById("bundleList");
+const bundleContainer = document.getElementById("bundleContainer");
 
-bundles.forEach(plan => {
-  const div = document.createElement("div");
-  div.className = "bundle";
-  div.innerHTML = `Buy ${plan}<div class="no-expiry">*No Expiry*</div>`;
-  div.onclick = () => selectPlan(plan);
-  bundleContainer.appendChild(div);
+bundles.forEach(bundle => {
+    const div = document.createElement("div");
+    div.className = "bundle";
+    div.innerHTML = `
+        <h3>${bundle}</h3>
+        <p>No Expiry</p>
+        <button onclick="selectNetwork('${bundle}')">Place Order</button>
+    `;
+    bundleContainer.appendChild(div);
 });
 
-function showBundles(){
-  homeSection.style.display="none";
-  bundleSection.style.display="block";
-}
+function selectNetwork(bundle) {
 
-function selectPlan(plan){
-  chosenPlan = plan;
-  bundleSection.style.display="none";
-  networkSection.style.display="block";
-}
+    const network = prompt("Enter Network (MTN / Telecel / AT):");
+    if (!network) return;
 
-function selectNetwork(network){
-  chosenNetwork = network;
-  networkSection.style.display="none";
-  orderSection.style.display="block";
-  selectedPlan.innerText =
-  "Selected Plan: " + chosenPlan + " | Network: " + chosenNetwork;
-}
+    const phone = prompt("Enter Customer Phone Number:");
+    if (!phone) return;
 
-function outOfStock(){
-  alert("This network is currently Out of Stock.");
-}
+    const message = `Hello, I want to order ${bundle} for ${network}. Phone: ${phone}`;
 
-function sendOrder(){
-
-  let name = customerName.value;
-  let phone = customerPhone.value;
-
-  if(name==="" || phone===""){
-    alert("Please fill all fields");
-    return;
-  }
-
-  popupDetails.innerHTML =
-  "Name: "+name+"<br>"+
-  "Phone: "+phone+"<br>"+
-  "Network: "+chosenNetwork+"<br>"+
-  "Bundle: "+chosenPlan;
-
-  confirmPopup.style.display="flex";
-}
-
-function closePopup(){
-  confirmPopup.style.display="none";
-}
-
-function confirmOrder(){
-
-  confirmPopup.style.display="none";
-  loadingText.style.display="block";
-
-  let name = customerName.value;
-  let phone = customerPhone.value;
-
-  let message =
-  "NEW ORDER\n"+
-  "Name: "+name+"\n"+
-  "Phone: "+phone+"\n"+
-  "Network: "+chosenNetwork+"\n"+
-  "Bundle: "+chosenPlan;
-
-  setTimeout(function(){
-
-    // SMS Redirect
-    window.location.href =
-    "sms:0542021230?body=" + encodeURIComponent(message);
-
-    loadingText.style.display="none";
-    successPopup.style.display="flex";
-
-  },1000);
-}
-
-function closeSuccess(){
-  successPopup.style.display="none";
-}
-
-function backToHome(){
-  bundleSection.style.display="none";
-  homeSection.style.display="block";
-}
-
-function backToBundles(){
-  networkSection.style.display="none";
-  bundleSection.style.display="block";
-}
-
-function backToNetwork(){
-  orderSection.style.display="none";
-  networkSection.style.display="block";
+    // SMS redirect
+    window.location.href = `sms:0542021230?body=${encodeURIComponent(message)}`;
 }
 
 </script>
