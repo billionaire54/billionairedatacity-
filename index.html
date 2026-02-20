@@ -2,291 +2,219 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Billionaire Data City</title>
+<title>Billionaire Data Center</title>
 
 <style>
 body{
-margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-color:white;
-text-align:center;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#000;
+    color:#fff;
+    text-align:center;
 }
 
-section{padding:40px 20px;}
-.hidden{display:none;}
-
-.get-started{
-background:#00d4aa;
-color:black;
-padding:12px 30px;
-border:none;
-border-radius:8px;
-font-size:16px;
-font-weight:bold;
+h1{
+    color:gold;
+    margin-top:20px;
 }
 
-.network-btn{
-padding:12px 25px;
-margin:10px;
-border:none;
-border-radius:8px;
-font-weight:bold;
+.container{
+    padding:20px;
 }
 
-.mtn{background:#ffcc00;color:black;}
-.telecel{background:#e60000;color:white;}
-.at{background:#007bff;color:white;}
-
-.bundle-btn{
-background:#2e2a8f;
-margin:12px auto;
-padding:18px;
-border-radius:15px;
-width:90%;
-max-width:420px;
-cursor:pointer;
+button{
+    padding:12px;
+    margin:6px;
+    width:90%;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    background:linear-gradient(45deg,gold,#b8860b);
+    color:black;
+    font-weight:bold;
 }
 
-.bundle-btn h3{margin:0;}
-.bundle-btn small{opacity:0.8;}
-
-input{
-width:85%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:none;
+button:hover{
+    opacity:0.85;
 }
 
-.place-btn{
-background:#00d4aa;
-color:black;
-padding:12px 25px;
-border:none;
-border-radius:8px;
-font-weight:bold;
-margin:10px;
-cursor:pointer;
+input, select{
+    padding:10px;
+    width:90%;
+    margin:6px;
+    border-radius:6px;
+    border:none;
 }
 
-.back-btn{
-background:#ff4d4d;
-color:white;
-padding:12px 25px;
-border:none;
-border-radius:8px;
-font-weight:bold;
-margin:10px;
-cursor:pointer;
+.card{
+    background:#111;
+    padding:15px;
+    border-radius:10px;
+    margin:10px;
+    box-shadow:0 0 10px gold;
 }
 
-.success-box{
-background:white;
-color:black;
-padding:30px;
-border-radius:20px;
-width:85%;
-max-width:400px;
-margin:30px auto;
-}
-
-.testimonial-section{
-background:white;
-color:black;
-border-radius:25px;
-padding:30px 20px;
-width:90%;
-max-width:500px;
-margin:40px auto;
-}
-
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25d366;
-color:white;
-padding:15px;
-border-radius:50%;
-text-decoration:none;
-font-size:22px;
+.admin-btn{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    background:red;
+    color:white;
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<section id="home">
-<h1>Welcome to Billionaire Data City</h1>
-<button class="get-started" onclick="showNetwork()">Get Started</button>
-</section>
+<h1>Billionaire Data Center</h1>
 
-<section id="networkPage" class="hidden">
-<h2>Select Network</h2>
-
-<button class="network-btn mtn" onclick="loadBundles('MTN')">MTN</button>
-<button class="network-btn telecel" onclick="loadBundles('Telecel')">Telecel</button>
-<button class="network-btn at" onclick="loadBundles('AT')">AT</button>
-
-<br>
-<button class="back-btn" onclick="goHome()">← Back</button>
-</section>
-
-<section id="bundlesPage" class="hidden">
-<h2>Available Data Bundles</h2>
-<div id="bundleList"></div>
-
-<p style="margin-top:20px;opacity:0.8;font-size:14px;">
-⚠ CLICK ON THE WHATSAPP ICON TO CONTACT ADMIN IF YOU DON'T SEE THE TYPE OF DATA YOU WANT
-</p>
-
-<button class="back-btn" onclick="backToNetwork()">← Back</button>
-</section>
-
-<section id="orderPage" class="hidden">
-<h2>Complete Your Order</h2>
-<p id="selectedPlan"></p>
-
-<input type="text" id="name" placeholder="Enter Full Name">
-<input type="text" id="phone" placeholder="Enter Phone Number">
-
-<br>
-<button class="place-btn" onclick="placeOrder()">Place Order</button>
-<button class="back-btn" onclick="backToBundles()">← Back</button>
-</section>
-
-<section id="successPage" class="hidden">
-<div class="success-box">
-<h2>✔ Order Ready!</h2>
-<p id="orderID"></p>
-<p>Choose how you want to send your order:</p>
-
-<button class="place-btn" onclick="sendSMS()">📩 Send via SMS</button>
-<br>
-<button class="place-btn" onclick="sendWhatsApp()">💬 Send via WhatsApp</button>
-<br><br>
-<button class="back-btn" onclick="goHome()">Close</button>
+<div class="container" id="mainMenu">
+    <button onclick="selectNetwork('MTN')">MTN</button>
+    <button onclick="selectNetwork('Telecel')">Telecel</button>
+    <button onclick="selectNetwork('AT')">AT</button>
 </div>
-</section>
 
-<section>
-<div class="testimonial-section">
-<h2>⭐✔️💚 Trusted by Our Customers</h2>
-<p>“Fast delivery! Got my data in 5 minutes.”<br><b>- Akwesi Soja.</b></p>
-<p>“Very reliable. I always buy from Billionaire Data City.”<br><b>- Emmanuela Tey.</b></p>
-<p>“Affordable prices and no expiry. Highly recommend!”<br><b>- Kofi Banana.</b></p>
+<div class="container" id="orderSection" style="display:none;">
+    <div class="card">
+        <h3 id="networkTitle"></h3>
+        <select id="plan"></select>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="number" id="phone" placeholder="Your Number">
+        <button onclick="placeOrder()">Place Order</button>
+        <button onclick="goBack()">Back</button>
+    </div>
 </div>
-</section>
 
-<a href="https://wa.me/233542021230" class="whatsapp">💬</a>
+<div class="container" id="successSection" style="display:none;">
+    <div class="card">
+        <h3>Order Successful 🎉</h3>
+        <p id="orderDetails"></p>
+        <button onclick="contactWhatsApp()">Send via WhatsApp</button>
+        <button onclick="contactSMS()">Send via SMS</button>
+    </div>
+</div>
+
+<button class="admin-btn" onclick="adminLogin()">Admin</button>
 
 <script>
 
 let selectedNetwork="";
-let selectedPlan="";
-let orderMessage="";
+let orderID="";
 
-const allBundles = {
-MTN:[
-["1GB","5gh"],["2GB","10gh"],["3GB","14.5gh"],
-["4GB","19gh"],["5GB","25gh"],["6GB","26.5gh"],
-["7GB","30.5gh"],["8GB","35gh"],["9GB","37.5gh"],
-["10GB","42gh"],["12GB","50.5gh"],["15GB","60.5gh"],
-["20GB","70gh"],["25GB","99gh"],["30GB","120gh"],
-["40GB","155gh"],["50GB","195gh"]
-],
-Telecel:[
-["10GB","40gh"],["15GB","58gh"],["20GB","79gh"],
-["25GB","99gh"],["30GB","115gh"],["35GB","135gh"],
-["40GB","152gh"],["45GB","172gh"],["50GB","200gh"]
-],
-AT:[
-["20GB","64gh"],["30GB","73gh"],["40GB","85gh"],
-["50GB","96gh"],["60GB","137gh"],
-["80GB","172gh"],["100GB","202gh"],["200GB","360gh"]
-]
-};
+const mtnPrices = [
+"1GB = 5gh","2GB = 10gh","3GB = 14.5gh","4GB = 19gh",
+"5GB = 25gh","6GB = 26.5gh","7GB = 30.5gh","8GB = 35gh",
+"9GB = 37.5gh","10GB = 42gh","12GB = 50.5gh","15GB = 60.5gh",
+"20GB = 70gh","25GB = 99gh","30GB = 120gh",
+"40GB = 155gh","50GB = 195gh"
+];
 
-function showNetwork(){
-home.classList.add("hidden");
-networkPage.classList.remove("hidden");
+function selectNetwork(network){
+    selectedNetwork = network;
+    document.getElementById("mainMenu").style.display="none";
+    document.getElementById("orderSection").style.display="block";
+    document.getElementById("networkTitle").innerText=network+" Data Plans";
+
+    let planSelect=document.getElementById("plan");
+    planSelect.innerHTML="";
+
+    let prices = mtnPrices;
+
+    prices.forEach(plan=>{
+        let option=document.createElement("option");
+        option.text=plan;
+        planSelect.add(option);
+    });
 }
 
-function goHome(){
-home.classList.remove("hidden");
-networkPage.classList.add("hidden");
-bundlesPage.classList.add("hidden");
-orderPage.classList.add("hidden");
-successPage.classList.add("hidden");
-}
-
-function loadBundles(network){
-selectedNetwork=network;
-networkPage.classList.add("hidden");
-bundlesPage.classList.remove("hidden");
-bundleList.innerHTML="";
-
-allBundles[network].forEach(b=>{
-bundleList.innerHTML+=`
-<div class="bundle-btn" onclick="selectPlan('${b[0]}','${b[1]}')">
-<h3>Buy ${b[0]} = ${b[1]}</h3>
-<small>*No Expiry*</small>
-</div>`;
-});
-}
-
-function backToNetwork(){
-bundlesPage.classList.add("hidden");
-networkPage.classList.remove("hidden");
-}
-
-function selectPlan(size,price){
-selectedPlan=size+" = "+price;
-bundlesPage.classList.add("hidden");
-orderPage.classList.remove("hidden");
-document.getElementById("selectedPlan").innerText=
-"Selected Plan: "+selectedPlan+" | Network: "+selectedNetwork;
-}
-
-function backToBundles(){
-orderPage.classList.add("hidden");
-bundlesPage.classList.remove("hidden");
+function goBack(){
+    document.getElementById("mainMenu").style.display="block";
+    document.getElementById("orderSection").style.display="none";
 }
 
 function placeOrder(){
+    let name=document.getElementById("name").value;
+    let phone=document.getElementById("phone").value;
+    let plan=document.getElementById("plan").value;
 
-let name=document.getElementById("name").value.trim();
-let phone=document.getElementById("phone").value.trim();
+    if(name=="" || phone==""){
+        alert("Fill all fields");
+        return;
+    }
 
-if(name==="" || phone===""){
-alert("Please enter your name and phone number.");
-return;
+    orderID="ORD"+Math.floor(Math.random()*100000);
+
+    let order={
+        id:orderID,
+        name:name,
+        phone:phone,
+        network:selectedNetwork,
+        plan:plan
+    };
+
+    let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+    orders.push(order);
+    localStorage.setItem("orders",JSON.stringify(orders));
+
+    document.getElementById("orderSection").style.display="none";
+    document.getElementById("successSection").style.display="block";
+
+    document.getElementById("orderDetails").innerText=
+    "Order ID: "+orderID+
+    "\nName: "+name+
+    "\nPhone: "+phone+
+    "\nNetwork: "+selectedNetwork+
+    "\nPlan: "+plan;
 }
 
-let orderID="BDC-"+Math.floor(10000+Math.random()*90000);
-
-orderMessage=`Order ID: ${orderID}%0A
-Name: ${name}%0A
-Phone: ${phone}%0A
-Network: ${selectedNetwork}%0A
-Plan: ${selectedPlan}`;
-
-document.getElementById("orderID").innerText="Your Order ID: "+orderID;
-
-orderPage.classList.add("hidden");
-successPage.classList.remove("hidden");
+function contactWhatsApp(){
+    let message=document.getElementById("orderDetails").innerText;
+    window.location.href="https://wa.me/233542021230?text="+encodeURIComponent(message);
 }
 
-function sendSMS(){
-window.location.href=`sms:0542021230?body=${orderMessage}`;
+function contactSMS(){
+    let message=document.getElementById("orderDetails").innerText;
+    window.location.href="sms:0542021230?body="+encodeURIComponent(message);
 }
 
-function sendWhatsApp(){
-window.location.href=`https://wa.me/233542021230?text=${orderMessage}`;
+function adminLogin(){
+    let pass=prompt("Enter Admin Password:");
+    if(pass==="900$Million"){
+        showAdmin();
+    }else{
+        alert("Wrong Password");
+    }
+}
+
+function showAdmin(){
+    let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+    let display="ADMIN PANEL\n\n";
+
+    orders.forEach(o=>{
+        display+=
+        "ID: "+o.id+
+        "\nName: "+o.name+
+        "\nPhone: "+o.phone+
+        "\nNetwork: "+o.network+
+        "\nPlan: "+o.plan+
+        "\n------------------\n";
+    });
+
+    if(orders.length===0){
+        display+="No Orders Yet";
+    }
+
+    if(confirm(display+"\nClear all orders?")){
+        localStorage.removeItem("orders");
+        alert("Orders Cleared");
+    }
 }
 
 </script>
 
 </body>
-  </html>
+</html>
