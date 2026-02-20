@@ -14,7 +14,6 @@ text-align:center;
 }
 
 section{padding:40px 20px;}
-
 .hidden{display:none;}
 
 .logo{width:120px;margin-bottom:20px;}
@@ -29,6 +28,18 @@ font-size:16px;
 font-weight:bold;
 }
 
+.network-btn{
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.mtn{background:#ffcc00;color:black;}
+.telecel{background:#e60000;color:white;}
+.at{background:#007bff;color:white;}
+
 .bundle-btn{
 background:#2e2a8f;
 margin:12px auto;
@@ -39,7 +50,7 @@ max-width:420px;
 cursor:pointer;
 }
 
-.bundle-btn h3{margin:0;font-weight:bold;}
+.bundle-btn h3{margin:0;}
 .bundle-btn small{opacity:0.8;}
 
 input{
@@ -108,24 +119,30 @@ font-size:22px;
 
 <!-- HOME -->
 <section id="home">
-<img src="your-logo.png" class="logo">
 <h1>Welcome to Billionaire Data City</h1>
-<button class="get-started" onclick="showBundles()">Get Started</button>
+<button class="get-started" onclick="showNetwork()">Get Started</button>
+</section>
+
+<!-- SELECT NETWORK -->
+<section id="networkPage" class="hidden">
+<h2>Select Network</h2>
+
+<button class="network-btn mtn" onclick="loadBundles('MTN')">MTN</button>
+<button class="network-btn telecel" onclick="loadBundles('Telecel')">Telecel</button>
+<button class="network-btn at" onclick="loadBundles('AT')">AT</button>
+
+<br>
+<button class="back-btn" onclick="goHome()">← Back</button>
 </section>
 
 <!-- BUNDLES -->
-<section id="bundles" class="hidden">
+<section id="bundlesPage" class="hidden">
 <h2>Available Data Bundles</h2>
-
 <div id="bundleList"></div>
-
-<div class="bundle-btn" onclick="goHome()" style="background:#444;">
-<h3>← Back</h3>
-</div>
-
+<button class="back-btn" onclick="backToNetwork()">← Back</button>
 </section>
 
-<!-- ORDER PAGE -->
+<!-- ORDER -->
 <section id="orderPage" class="hidden">
 <h2>Complete Your Order</h2>
 <p id="selectedPlan"></p>
@@ -159,68 +176,86 @@ font-size:22px;
 <a href="https://wa.me/233542021230" class="whatsapp">💬</a>
 
 <script>
-const bundles = [
-{size:"1GB",price:"5gh"},
-{size:"2GB",price:"10gh"},
-{size:"3GB",price:"14.5gh"},
-{size:"4GB",price:"19.5gh"},
-{size:"5GB",price:"23.5gh"},
-{size:"6GB",price:"25.5gh"},
-{size:"7GB",price:"30gh"},
-{size:"8GB",price:"34.5gh"},
-{size:"9GB",price:"38gh"},
-{size:"25GB",price:"100gh"},
-{size:"30GB",price:"120gh"},
-{size:"35GB",price:"140gh"},
-{size:"40GB",price:"155gh"},
-{size:"45GB",price:"170gh"},
-{size:"50GB",price:"190gh"}
-];
+let selectedNetwork="";
+let selectedPlan="";
 
-let selected="";
+const allBundles = {
+MTN:[
+["1GB","5gh"],["2GB","10gh"],["3GB","14.5gh"],
+["4GB","19.5gh"],["5GB","23.5gh"],["6GB","25.5gh"],
+["7GB","30gh"],["8GB","34.5gh"],["9GB","38gh"],
+["25GB","100gh"],["30GB","120gh"],
+["35GB","140gh"],["40GB","155gh"],
+["45GB","170gh"],["50GB","190gh"]
+],
+Telecel:[
+["10GB","40gh"],["15GB","58gh"],["20GB","79gh"],
+["25GB","99gh"],["30GB","115gh"],["35GB","135gh"],
+["40GB","152gh"],["45GB","172gh"],["50GB","200gh"]
+],
+AT:[
+["20GB","64gh"],["30GB","73gh"],["40GB","85gh"],
+["50GB","96gh"],["60GB","137gh"],
+["80GB","172gh"],["100GB","202gh"],["200GB","360gh"]
+]
+};
 
-const list=document.getElementById("bundleList");
-bundles.forEach(b=>{
-list.innerHTML+=`
-<div class="bundle-btn" onclick="selectBundle('${b.size}','${b.price}')">
-<h3>Buy ${b.size} = ${b.price}</h3>
+function showNetwork(){
+home.classList.add("hidden");
+networkPage.classList.remove("hidden");
+}
+
+function goHome(){
+home.classList.remove("hidden");
+networkPage.classList.add("hidden");
+bundlesPage.classList.add("hidden");
+orderPage.classList.add("hidden");
+successPage.classList.add("hidden");
+}
+
+function loadBundles(network){
+selectedNetwork=network;
+networkPage.classList.add("hidden");
+bundlesPage.classList.remove("hidden");
+
+bundleList.innerHTML="";
+
+allBundles[network].forEach(b=>{
+bundleList.innerHTML+=`
+<div class="bundle-btn" onclick="selectPlan('${b[0]}','${b[1]}')">
+<h3>Buy ${b[0]} = ${b[1]}</h3>
 <small>*No Expiry*</small>
 </div>
 `;
 });
-
-function showBundles(){
-document.getElementById("home").classList.add("hidden");
-document.getElementById("bundles").classList.remove("hidden");
 }
 
-function goHome(){
-document.getElementById("home").classList.remove("hidden");
-document.getElementById("bundles").classList.add("hidden");
-document.getElementById("orderPage").classList.add("hidden");
-document.getElementById("successPage").classList.add("hidden");
+function backToNetwork(){
+bundlesPage.classList.add("hidden");
+networkPage.classList.remove("hidden");
 }
 
-function selectBundle(size,price){
-selected=`${size} = ${price}`;
-document.getElementById("selectedPlan").innerText="Selected Plan: "+selected+" | Network: MTN";
-document.getElementById("bundles").classList.add("hidden");
-document.getElementById("orderPage").classList.remove("hidden");
+function selectPlan(size,price){
+selectedPlan=size+" = "+price;
+bundlesPage.classList.add("hidden");
+orderPage.classList.remove("hidden");
+selectedPlanDisplay="Selected Plan: "+selectedPlan+" | Network: "+selectedNetwork;
+document.getElementById("selectedPlan").innerText=selectedPlanDisplay;
 }
 
 function backToBundles(){
-document.getElementById("orderPage").classList.add("hidden");
-document.getElementById("bundles").classList.remove("hidden");
+orderPage.classList.add("hidden");
+bundlesPage.classList.remove("hidden");
 }
 
 function placeOrder(){
 let name=document.getElementById("name").value;
 let phone=document.getElementById("phone").value;
 
-let message=`New Order:%0AName: ${name}%0APhone: ${phone}%0APlan: ${selected}`;
+let message=`New Order:%0AName: ${name}%0APhone: ${phone}%0ANetwork: ${selectedNetwork}%0APlan: ${selectedPlan}`;
 
-document.getElementById("orderPage").classList.add("hidden");
-document.getElementById("successPage").classList.remove("hidden");
+orderPage.classList.add("hidden");
+successPage.classList.remove("hidden");
 
 setTimeout(()=>{
 window.location.href=`sms:0542021230?body=${message}`;
@@ -229,4 +264,4 @@ window.location.href=`sms:0542021230?body=${message}`;
 </script>
 
 </body>
-  </html>
+</html>
