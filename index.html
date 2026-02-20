@@ -16,7 +16,10 @@ text-align:center;
 section{padding:40px 20px;}
 .hidden{display:none;}
 
-.logo{width:120px;margin-bottom:20px;}
+.logo{
+width:120px;
+margin-bottom:20px;
+}
 
 .get-started{
 background:#00d4aa;
@@ -119,6 +122,7 @@ font-size:22px;
 
 <!-- HOME -->
 <section id="home">
+<img src="logo.png" class="logo">
 <h1>Welcome to Billionaire Data City</h1>
 <button class="get-started" onclick="showNetwork()">Get Started</button>
 </section>
@@ -139,6 +143,11 @@ font-size:22px;
 <section id="bundlesPage" class="hidden">
 <h2>Available Data Bundles</h2>
 <div id="bundleList"></div>
+
+<p style="margin-top:20px;opacity:0.8;font-size:14px;">
+⚠ CLICK ON THE WHATSAPP ICON TO CONTACT ADMIN IF YOU DON'T SEE THE TYPE OF DATA YOU WANT
+</p>
+
 <button class="back-btn" onclick="backToNetwork()">← Back</button>
 </section>
 
@@ -217,7 +226,6 @@ function loadBundles(network){
 selectedNetwork=network;
 networkPage.classList.add("hidden");
 bundlesPage.classList.remove("hidden");
-
 bundleList.innerHTML="";
 
 allBundles[network].forEach(b=>{
@@ -239,8 +247,8 @@ function selectPlan(size,price){
 selectedPlan=size+" = "+price;
 bundlesPage.classList.add("hidden");
 orderPage.classList.remove("hidden");
-selectedPlanDisplay="Selected Plan: "+selectedPlan+" | Network: "+selectedNetwork;
-document.getElementById("selectedPlan").innerText=selectedPlanDisplay;
+document.getElementById("selectedPlan").innerText=
+"Selected Plan: "+selectedPlan+" | Network: "+selectedNetwork;
 }
 
 function backToBundles(){
@@ -264,4 +272,4 @@ window.location.href=`sms:0542021230?body=${message}`;
 </script>
 
 </body>
-</html>
+  </html>
