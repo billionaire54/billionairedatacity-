@@ -16,11 +16,6 @@ text-align:center;
 section{padding:40px 20px;}
 .hidden{display:none;}
 
-.logo{
-width:120px;
-margin-bottom:20px;
-}
-
 .get-started{
 background:#00d4aa;
 color:black;
@@ -72,6 +67,7 @@ border:none;
 border-radius:8px;
 font-weight:bold;
 margin:10px;
+cursor:pointer;
 }
 
 .back-btn{
@@ -82,6 +78,7 @@ border:none;
 border-radius:8px;
 font-weight:bold;
 margin:10px;
+cursor:pointer;
 }
 
 .success-box{
@@ -121,7 +118,6 @@ font-size:22px;
 <body>
 
 <section id="home">
-<img src="logo.png" class="logo">
 <h1>Welcome to Billionaire Data City</h1>
 <button class="get-started" onclick="showNetwork()">Get Started</button>
 </section>
@@ -162,14 +158,21 @@ font-size:22px;
 
 <section id="successPage" class="hidden">
 <div class="success-box">
-<h2>✔ Order Sent Successfully!</h2>
-<button class="place-btn" onclick="goHome()">Close</button>
+<h2>✔ Order Ready!</h2>
+<p id="orderID"></p>
+<p>Choose how you want to send your order:</p>
+
+<button class="place-btn" onclick="sendSMS()">📩 Send via SMS</button>
+<br>
+<button class="place-btn" onclick="sendWhatsApp()">💬 Send via WhatsApp</button>
+<br><br>
+<button class="back-btn" onclick="goHome()">Close</button>
 </div>
 </section>
 
 <section>
 <div class="testimonial-section">
-<h2>⭐💚 Trusted by Our Customers</h2>
+<h2>⭐✔️💚 Trusted by Our Customers</h2>
 <p>“Fast delivery! Got my data in 5 minutes.”<br><b>- Akwesi Soja.</b></p>
 <p>“Very reliable. I always buy from Billionaire Data City.”<br><b>- Emmanuela Tey.</b></p>
 <p>“Affordable prices and no expiry. Highly recommend!”<br><b>- Kofi Banana.</b></p>
@@ -179,28 +182,19 @@ font-size:22px;
 <a href="https://wa.me/233542021230" class="whatsapp">💬</a>
 
 <script>
+
 let selectedNetwork="";
 let selectedPlan="";
+let orderMessage="";
 
 const allBundles = {
 MTN:[
-["1GB","5gh"],
-["2GB","10gh"],
-["3GB","14.5gh"],
-["4GB","19gh"],
-["5GB","25gh"],
-["6GB","26.5gh"],
-["7GB","30.5gh"],
-["8GB","35gh"],
-["9GB","37.5gh"],
-["10GB","42gh"],
-["12GB","50.5gh"],
-["15GB","60.5gh"],
-["20GB","70gh"],
-["25GB","99gh"],
-["30GB","120gh"],
-["40GB","155gh"],
-["50GB","195gh"]
+["1GB","5gh"],["2GB","10gh"],["3GB","14.5gh"],
+["4GB","19gh"],["5GB","25gh"],["6GB","26.5gh"],
+["7GB","30.5gh"],["8GB","35gh"],["9GB","37.5gh"],
+["10GB","42gh"],["12GB","50.5gh"],["15GB","60.5gh"],
+["20GB","70gh"],["25GB","99gh"],["30GB","120gh"],
+["40GB","155gh"],["50GB","195gh"]
 ],
 Telecel:[
 ["10GB","40gh"],["15GB","58gh"],["20GB","79gh"],
@@ -238,8 +232,7 @@ bundleList.innerHTML+=`
 <div class="bundle-btn" onclick="selectPlan('${b[0]}','${b[1]}')">
 <h3>Buy ${b[0]} = ${b[1]}</h3>
 <small>*No Expiry*</small>
-</div>
-`;
+</div>`;
 });
 }
 
@@ -262,19 +255,38 @@ bundlesPage.classList.remove("hidden");
 }
 
 function placeOrder(){
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
 
-let message=`New Order:%0AName: ${name}%0APhone: ${phone}%0ANetwork: ${selectedNetwork}%0APlan: ${selectedPlan}`;
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+
+if(name==="" || phone===""){
+alert("Please enter your name and phone number.");
+return;
+}
+
+let orderID="BDC-"+Math.floor(10000+Math.random()*90000);
+
+orderMessage=`Order ID: ${orderID}%0A
+Name: ${name}%0A
+Phone: ${phone}%0A
+Network: ${selectedNetwork}%0A
+Plan: ${selectedPlan}`;
+
+document.getElementById("orderID").innerText="Your Order ID: "+orderID;
 
 orderPage.classList.add("hidden");
 successPage.classList.remove("hidden");
-
-setTimeout(()=>{
-window.location.href=`sms:0542021230?body=${message}`;
-},1500);
 }
+
+function sendSMS(){
+window.location.href=`sms:0542021230?body=${orderMessage}`;
+}
+
+function sendWhatsApp(){
+window.location.href=`https://wa.me/233542021230?text=${orderMessage}`;
+}
+
 </script>
 
 </body>
-</html>
+  </html>
