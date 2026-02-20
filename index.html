@@ -1,190 +1,181 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data Bundle Shop</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Bundle Order</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f2f2f2;
+  text-align:center;
+  margin:0;
+}
 
-    h1 {
-      margin-top: 40px;
-    }
+.container{
+  max-width:400px;
+  margin:40px auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
 
-    .btn {
-      padding: 12px 25px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-    }
+h2{
+  margin-bottom:20px;
+}
 
-    #getStarted {
-      background: black;
-      color: white;
-    }
+button{
+  padding:12px;
+  margin:8px 0;
+  width:100%;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    /* Network Buttons */
-    .network-btn {
-      color: white;
-    }
+/* Network Colors */
+.mtn{ background:#FFCC00; color:black; }
+.telecel{ background:#E60000; color:white; }
+.at{ background:#007BFF; color:white; }
 
-    .mtn {
-      background-color: #FFCC00;
-      color: black;
-    }
+.bundle{
+  padding:10px;
+  margin:6px 0;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    .telecel {
-      background-color: #E60000;
-    }
+.mtn-bundle{ background:#FFF3B0; }
+.telecel-bundle{ background:#FFCCCC; }
+.at-bundle{ background:#CCE5FF; }
 
-    .at {
-      background-color: #007BFF;
-    }
+input{
+  width:95%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
 
-    #network-section, 
-    #bundle-section, 
-    #order-section {
-      margin-top: 30px;
-      display: none;
-    }
+.order-btn{
+  background:black;
+  color:white;
+  margin-top:15px;
+}
 
-    .bundle-card {
-      background: white;
-      margin: 10px auto;
-      padding: 15px;
-      width: 250px;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-
-    .buy-btn {
-      margin-top: 10px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      color: white;
-    }
-
-    input {
-      padding: 10px;
-      width: 250px;
-      margin-top: 10px;
-    }
-
-  </style>
+.hidden{
+  display:none;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Affordable Data Bundles</h1>
+<div class="container">
 
-<button id="getStarted" class="btn" onclick="start()">Get Started</button>
+<h2>Select Network</h2>
 
-<!-- Network Selection -->
-<div id="network-section">
-  <h2>Select Network</h2>
-  <button class="btn network-btn mtn" onclick="selectNetwork('mtn')">MTN</button>
-  <button class="btn network-btn telecel" onclick="selectNetwork('telecel')">Telecel</button>
-  <button class="btn network-btn at" onclick="selectNetwork('at')">AirtelTigo (AT)</button>
+<div id="networkSection">
+  <button class="mtn" onclick="setNetwork('mtn')">MTN</button>
+  <button class="telecel" onclick="setNetwork('telecel')">Telecel</button>
+  <button class="at" onclick="setNetwork('at')">AT</button>
 </div>
 
-<!-- Bundles Display -->
-<div id="bundle-section"></div>
+<div id="bundleSection" class="hidden"></div>
 
-<!-- Order Section -->
-<div id="order-section">
+<div id="orderSection" class="hidden">
   <h3>Enter Phone Number</h3>
-  <input type="text" placeholder="Enter phone number">
-  <br>
-  <button class="btn" style="background:black; color:white;">Proceed to Pay</button>
+  <input type="text" id="phone" placeholder="Enter phone number">
+  <button class="order-btn" onclick="placeOrder()">Place Order</button>
+</div>
+
+<div id="summarySection" class="hidden"></div>
+
 </div>
 
 <script>
+let selectedNetwork = "";
+let selectedBundle = "";
+let selectedPrice = "";
 
-function start() {
-  document.getElementById("getStarted").style.display = "none";
-  document.getElementById("network-section").style.display = "block";
+function setNetwork(network){
+  selectedNetwork = network;
+  document.getElementById("bundleSection").classList.remove("hidden");
+  loadBundles(network);
 }
 
-function selectNetwork(network) {
+function loadBundles(network){
+  const bundleSection = document.getElementById("bundleSection");
 
-  const bundleSection = document.getElementById("bundle-section");
-  bundleSection.style.display = "block";
-  bundleSection.innerHTML = "";
-
-  let bundles = [];
-  let color = "";
-
-  if (network === "mtn") {
-    bundles = [
-      ["1GB", "5gh"],
-      ["5GB", "25gh"],
-      ["10GB", "45gh"],
-      ["20GB", "85gh"],
-      ["50GB", "200gh"]
-    ];
-    color = "#FFCC00";
-  }
-
-  if (network === "telecel") {
-    bundles = [
-      ["10GB", "40gh"],
-      ["15GB", "58gh"],
-      ["20GB", "79gh"],
-      ["25GB", "99gh"],
-      ["30GB", "115gh"],
-      ["35GB", "135gh"],
-      ["40GB", "152gh"],
-      ["45GB", "172gh"],
-      ["50GB", "200gh"]
-    ];
-    color = "#E60000";
-  }
-
-  if (network === "at") {
-    bundles = [
-      ["20GB", "64gh"],
-      ["30GB", "73gh"],
-      ["40GB", "85gh"],
-      ["50GB", "96gh"],
-      ["60GB", "137gh"],
-      ["80GB", "172gh"],
-      ["100GB", "202gh"],
-      ["200GB", "360gh"]
-    ];
-    color = "#007BFF";
-  }
-
-  bundles.forEach(bundle => {
-    bundleSection.innerHTML += `
-      <div class="bundle-card">
-        <h3>${bundle[0]}</h3>
-        <p>Price: ${bundle[1]}</p>
-        <button class="buy-btn" 
-          style="background:${color};"
-          onclick="buyBundle('${bundle[0]}')">
-          Buy Now
-        </button>
-      </div>
+  if(network === "mtn"){
+    bundleSection.innerHTML = `
+      <h3 style="color:#FFCC00;">MTN Bundles</h3>
+      <div class="bundle mtn-bundle" onclick="selectBundle('1GB','5')">1GB - 5gh</div>
+      <div class="bundle mtn-bundle" onclick="selectBundle('5GB','25')">5GB - 25gh</div>
+      <div class="bundle mtn-bundle" onclick="selectBundle('10GB','45')">10GB - 45gh</div>
+      <div class="bundle mtn-bundle" onclick="selectBundle('20GB','85')">20GB - 85gh</div>
+      <div class="bundle mtn-bundle" onclick="selectBundle('50GB','200')">50GB - 200gh</div>
     `;
-  });
+  }
 
+  if(network === "telecel"){
+    bundleSection.innerHTML = `
+      <h3 style="color:#E60000;">Telecel Bundles</h3>
+      <div class="bundle telecel-bundle" onclick="selectBundle('10GB','40')">10GB - 40gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('15GB','58')">15GB - 58gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('20GB','79')">20GB - 79gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('25GB','99')">25GB - 99gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('30GB','115')">30GB - 115gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('35GB','135')">35GB - 135gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('40GB','152')">40GB - 152gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('45GB','172')">45GB - 172gh</div>
+      <div class="bundle telecel-bundle" onclick="selectBundle('50GB','200')">50GB - 200gh</div>
+    `;
+  }
+
+  if(network === "at"){
+    bundleSection.innerHTML = `
+      <h3 style="color:#007BFF;">AT Bundles</h3>
+      <div class="bundle at-bundle" onclick="selectBundle('20GB','64')">20GB - 64gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('30GB','73')">30GB - 73gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('40GB','85')">40GB - 85gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('50GB','96')">50GB - 96gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('60GB','137')">60GB - 137gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('80GB','172')">80GB - 172gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('100GB','202')">100GB - 202gh</div>
+      <div class="bundle at-bundle" onclick="selectBundle('200GB','360')">200GB - 360gh</div>
+    `;
+  }
 }
 
-function buyBundle(bundleName) {
-  document.getElementById("order-section").style.display = "block";
-  alert("You selected " + bundleName);
+function selectBundle(bundle, price){
+  selectedBundle = bundle;
+  selectedPrice = price;
+  document.getElementById("orderSection").classList.remove("hidden");
 }
 
+function placeOrder(){
+  const phone = document.getElementById("phone").value;
+
+  if(phone === ""){
+    alert("Enter phone number");
+    return;
+  }
+
+  document.getElementById("summarySection").classList.remove("hidden");
+  document.getElementById("summarySection").innerHTML = `
+    <h3>Order Summary</h3>
+    <p><strong>Network:</strong> ${selectedNetwork.toUpperCase()}</p>
+    <p><strong>Bundle:</strong> ${selectedBundle}</p>
+    <p><strong>Price:</strong> ${selectedPrice}gh</p>
+    <p><strong>Phone:</strong> ${phone}</p>
+    <p style="color:green;"><strong>Order Placed Successfully!</strong></p>
+  `;
+}
 </script>
 
 </body>
