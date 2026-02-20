@@ -7,7 +7,7 @@
 <style>
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, sans-serif;
 background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
 color:white;
 text-align:center;
@@ -15,84 +15,79 @@ text-align:center;
 
 section{padding:40px 20px;}
 
+.hidden{display:none;}
+
+.logo{width:120px;margin-bottom:20px;}
+
 .get-started{
 background:#00d4aa;
 color:black;
 padding:12px 30px;
 border:none;
 border-radius:8px;
-font-weight:bold;
 font-size:16px;
-}
-
-.network-btn{
-padding:10px 20px;
-margin:8px;
-border:none;
-border-radius:8px;
 font-weight:bold;
 }
 
-.mtn{background:#ffcc00;color:black;}
-.telecel{background:#e60000;color:white;}
-.at{background:#007bff;color:white;}
-
-.card{
-background:white;
-color:black;
-margin:20px auto;
-padding:25px;
+.bundle-btn{
+background:#2e2a8f;
+margin:12px auto;
+padding:18px;
 border-radius:15px;
 width:90%;
-max-width:350px;
+max-width:420px;
+cursor:pointer;
 }
 
-.buy-btn{
-background:#ffcc00;
-padding:10px 20px;
-border:none;
-border-radius:8px;
-margin-top:10px;
-font-weight:bold;
-}
-
-.testimonial{
-background:#f2f2f2;
-color:black;
-padding:20px;
-margin:15px auto;
-border-radius:15px;
-width:90%;
-max-width:500px;
-}
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-justify-content:center;
-align-items:center;
-}
-
-.modal-content{
-background:white;
-color:black;
-padding:25px;
-border-radius:15px;
-width:90%;
-max-width:400px;
-}
+.bundle-btn h3{margin:0;font-weight:bold;}
+.bundle-btn small{opacity:0.8;}
 
 input{
-width:100%;
-padding:10px;
+width:85%;
+padding:12px;
 margin:10px 0;
 border-radius:8px;
-border:1px solid #ccc;
+border:none;
+}
+
+.place-btn{
+background:#00d4aa;
+color:black;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+margin:10px;
+}
+
+.back-btn{
+background:#ff4d4d;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+margin:10px;
+}
+
+.success-box{
+background:white;
+color:black;
+padding:30px;
+border-radius:20px;
+width:85%;
+max-width:400px;
+margin:30px auto;
+}
+
+.testimonial-section{
+background:white;
+color:black;
+border-radius:25px;
+padding:30px 20px;
+width:90%;
+max-width:500px;
+margin:40px auto;
 }
 
 .whatsapp{
@@ -101,131 +96,137 @@ bottom:20px;
 right:20px;
 background:#25d366;
 color:white;
-font-size:22px;
 padding:15px;
 border-radius:50%;
 text-decoration:none;
+font-size:22px;
 }
 </style>
 </head>
 
 <body>
 
-<section>
+<!-- HOME -->
+<section id="home">
+<img src="your-logo.png" class="logo">
 <h1>Welcome to Billionaire Data City</h1>
-<button class="get-started" onclick="scrollToBundles()">Get Started</button>
+<button class="get-started" onclick="showBundles()">Get Started</button>
 </section>
 
+<!-- BUNDLES -->
+<section id="bundles" class="hidden">
+<h2>Available Data Bundles</h2>
+
+<div id="bundleList"></div>
+
+<div class="bundle-btn" onclick="goHome()" style="background:#444;">
+<h3>← Back</h3>
+</div>
+
+</section>
+
+<!-- ORDER PAGE -->
+<section id="orderPage" class="hidden">
+<h2>Complete Your Order</h2>
+<p id="selectedPlan"></p>
+
+<input type="text" id="name" placeholder="Enter Full Name">
+<input type="text" id="phone" placeholder="Enter Phone Number">
+
+<br>
+<button class="place-btn" onclick="placeOrder()">Place Order</button>
+<button class="back-btn" onclick="backToBundles()">← Back</button>
+</section>
+
+<!-- SUCCESS -->
+<section id="successPage" class="hidden">
+<div class="success-box">
+<h2>✔ Order Sent Successfully!</h2>
+<button class="place-btn" onclick="goHome()">Close</button>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
 <section>
-<div class="testimonial">⭐ Trusted by Our Customers</div>
-
-<div class="testimonial">
-“Fast delivery! Got my data in 5 minutes.”<br><b>- Akwesi Soja.</b>
-</div>
-
-<div class="testimonial">
-“Very reliable. I always buy from Billionaire Data City.”<br><b>- Emmanuela Tey.</b>
-</div>
-
-<div class="testimonial">
-“Affordable prices and no expiry. Highly recommend!”<br><b>- Kofi Banana.</b>
+<div class="testimonial-section">
+<h2>⭐ Trusted by Our Customers</h2>
+<p>“Fast delivery! Got my data in 5 minutes.”<br><b>- Akwesi Soja.</b></p>
+<p>“Very reliable. I always buy from Billionaire Data City.”<br><b>- Emmanuela Tey.</b></p>
+<p>“Affordable prices and no expiry. Highly recommend!”<br><b>- Kofi Banana.</b></p>
 </div>
 </section>
 
-<section id="bundles">
-<h2>Select Network</h2>
-
-<button class="network-btn mtn" onclick="showNetwork('mtn')">MTN</button>
-<button class="network-btn telecel" onclick="showNetwork('telecel')">Telecel</button>
-<button class="network-btn at" onclick="showNetwork('at')">AT</button>
-
-<div id="bundle-container"></div>
-</section>
-
-<div class="modal" id="orderModal">
-<div class="modal-content">
-<h3>Place Order</h3>
-<p id="selectedInfo"></p>
-<input type="text" id="name" placeholder="Full Name">
-<input type="text" id="number" placeholder="Phone Number">
-<button onclick="sendSMS()">Confirm Order</button>
-</div>
-</div>
-
-<a href="https://wa.me/233XXXXXXXXX" class="whatsapp">💬</a>
+<a href="https://wa.me/233542021230" class="whatsapp">💬</a>
 
 <script>
-const bundles = {
-mtn:[
-{size:"1GB",price:"6gh"},
-{size:"2GB",price:"12gh"},
-{size:"5GB",price:"25gh"},
-{size:"10GB",price:"45gh"},
-{size:"20GB",price:"79gh"},
-{size:"50GB",price:"200gh"}
-],
-telecel:[
-{size:"10GB",price:"40gh"},
-{size:"15GB",price:"58gh"},
-{size:"20GB",price:"79gh"},
-{size:"25GB",price:"99gh"},
-{size:"30GB",price:"115gh"},
-{size:"35GB",price:"135gh"},
-{size:"40GB",price:"152gh"},
-{size:"45GB",price:"172gh"},
-{size:"50GB",price:"200gh"}
-],
-at:[
-{size:"20GB",price:"64gh"},
-{size:"30GB",price:"73gh"},
-{size:"40GB",price:"85gh"},
-{size:"50GB",price:"96gh"},
-{size:"60GB",price:"137gh"},
-{size:"80GB",price:"172gh"},
-{size:"100GB",price:"202gh"},
-{size:"200GB",price:"360gh"}
-]
-};
+const bundles = [
+{size:"1GB",price:"5gh"},
+{size:"2GB",price:"10gh"},
+{size:"3GB",price:"14.5gh"},
+{size:"4GB",price:"19.5gh"},
+{size:"5GB",price:"23.5gh"},
+{size:"6GB",price:"25.5gh"},
+{size:"7GB",price:"30gh"},
+{size:"8GB",price:"34.5gh"},
+{size:"9GB",price:"38gh"},
+{size:"25GB",price:"100gh"},
+{size:"30GB",price:"120gh"},
+{size:"35GB",price:"140gh"},
+{size:"40GB",price:"155gh"},
+{size:"45GB",price:"170gh"},
+{size:"50GB",price:"190gh"}
+];
 
-let selectedBundle="";
-let selectedNetwork="";
+let selected="";
 
-function scrollToBundles(){
-document.getElementById("bundles").scrollIntoView({behavior:"smooth"});
-}
-
-function showNetwork(network){
-selectedNetwork=network;
-const container=document.getElementById("bundle-container");
-container.innerHTML="";
-
-bundles[network].forEach(bundle=>{
-container.innerHTML+=`
-<div class="card">
-<h3>${bundle.size}</h3>
-<p>Price: ${bundle.price}</p>
-<button class="buy-btn" onclick="openModal('${bundle.size}','${bundle.price}')">Buy Now</button>
+const list=document.getElementById("bundleList");
+bundles.forEach(b=>{
+list.innerHTML+=`
+<div class="bundle-btn" onclick="selectBundle('${b.size}','${b.price}')">
+<h3>Buy ${b.size} = ${b.price}</h3>
+<small>*No Expiry*</small>
 </div>
 `;
 });
+
+function showBundles(){
+document.getElementById("home").classList.add("hidden");
+document.getElementById("bundles").classList.remove("hidden");
 }
 
-function openModal(size,price){
-selectedBundle=`${size} - ${price}`;
-document.getElementById("selectedInfo").innerText=
-"Network: "+selectedNetwork.toUpperCase()+"\nBundle: "+selectedBundle;
-document.getElementById("orderModal").style.display="flex";
+function goHome(){
+document.getElementById("home").classList.remove("hidden");
+document.getElementById("bundles").classList.add("hidden");
+document.getElementById("orderPage").classList.add("hidden");
+document.getElementById("successPage").classList.add("hidden");
 }
 
-function sendSMS(){
+function selectBundle(size,price){
+selected=`${size} = ${price}`;
+document.getElementById("selectedPlan").innerText="Selected Plan: "+selected+" | Network: MTN";
+document.getElementById("bundles").classList.add("hidden");
+document.getElementById("orderPage").classList.remove("hidden");
+}
+
+function backToBundles(){
+document.getElementById("orderPage").classList.add("hidden");
+document.getElementById("bundles").classList.remove("hidden");
+}
+
+function placeOrder(){
 let name=document.getElementById("name").value;
-let number=document.getElementById("number").value;
+let phone=document.getElementById("phone").value;
 
-let message=`New Order:%0AName: ${name}%0ANumber: ${number}%0ANetwork: ${selectedNetwork}%0ABundle: ${selectedBundle}`;
+let message=`New Order:%0AName: ${name}%0APhone: ${phone}%0APlan: ${selected}`;
 
-window.location.href=`sms:055XXXXXXXX?body=${message}`;
+document.getElementById("orderPage").classList.add("hidden");
+document.getElementById("successPage").classList.remove("hidden");
+
+setTimeout(()=>{
+window.location.href=`sms:0542021230?body=${message}`;
+},1500);
 }
 </script>
 
 </body>
-</html>
+  </html>
