@@ -1,5 +1,186 @@
-<script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire Data City</title>
 
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+color:white;
+text-align:center;
+}
+
+section{padding:40px 20px;}
+.hidden{display:none;}
+
+.get-started{
+background:#00d4aa;
+color:black;
+padding:12px 30px;
+border:none;
+border-radius:8px;
+font-size:16px;
+font-weight:bold;
+}
+
+.network-btn{
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.mtn{background:#ffcc00;color:black;}
+.telecel{background:#e60000;color:white;}
+.at{background:#007bff;color:white;}
+
+.bundle-btn{
+margin:12px auto;
+padding:18px;
+border-radius:15px;
+width:90%;
+max-width:420px;
+cursor:pointer;
+}
+
+.bundle-btn h3{margin:0;}
+.bundle-btn small{opacity:0.8;}
+
+input{
+width:85%;
+padding:12px;
+margin:10px 0;
+border-radius:8px;
+border:none;
+}
+
+.place-btn{
+background:#00d4aa;
+color:black;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+margin:10px;
+cursor:pointer;
+}
+
+.back-btn{
+background:#ff4d4d;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+margin:10px;
+cursor:pointer;
+}
+
+.success-box{
+background:white;
+color:black;
+padding:30px;
+border-radius:20px;
+width:85%;
+max-width:400px;
+margin:30px auto;
+}
+
+.testimonial-section{
+background:white;
+color:black;
+border-radius:25px;
+padding:30px 20px;
+width:90%;
+max-width:500px;
+margin:40px auto;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+color:white;
+padding:15px;
+border-radius:50%;
+text-decoration:none;
+font-size:22px;
+}
+</style>
+</head>
+
+<body>
+
+<section id="home">
+<h1>Welcome to Billionaire Data City</h1>
+<button class="get-started" onclick="showNetwork()">Get Started</button>
+</section>
+
+<section id="networkPage" class="hidden">
+<h2>Select Network</h2>
+
+<button class="network-btn mtn" onclick="loadBundles('MTN')">MTN</button>
+<button class="network-btn telecel" onclick="loadBundles('Telecel')">Telecel</button>
+<button class="network-btn at" onclick="loadBundles('AT')">AT</button>
+
+<br>
+<button class="back-btn" onclick="goHome()">← Back</button>
+</section>
+
+<section id="bundlesPage" class="hidden">
+<h2>Available Data Bundles</h2>
+<div id="bundleList"></div>
+
+<p style="margin-top:20px;opacity:0.8;font-size:14px;">
+⚠ CLICK ON THE WHATSAPP ICON TO CONTACT ADMIN IF YOU DON'T SEE THE TYPE OF DATA YOU WANT
+</p>
+
+<button class="back-btn" onclick="backToNetwork()">← Back</button>
+</section>
+
+<section id="orderPage" class="hidden">
+<h2>Complete Your Order</h2>
+<p id="selectedPlan"></p>
+
+<input type="text" id="name" placeholder="Enter Full Name">
+<input type="text" id="phone" placeholder="Enter Phone Number">
+
+<br>
+<button class="place-btn" onclick="placeOrder()">Place Order</button>
+<button class="back-btn" onclick="backToBundles()">← Back</button>
+</section>
+
+<section id="successPage" class="hidden">
+<div class="success-box">
+<h2>✔ Order Ready!</h2>
+<p id="orderID"></p>
+<p>Choose how you want to send your order:</p>
+
+<button class="place-btn" onclick="sendSMS()">📩 Send via SMS</button>
+<br>
+<button class="place-btn" onclick="sendWhatsApp()">💬 Send via WhatsApp</button>
+<br><br>
+<button class="back-btn" onclick="goHome()">Close</button>
+</div>
+</section>
+
+<section>
+<div class="testimonial-section">
+<h2>⭐💚Trusted by Our Customers</h2>
+<p>“Fast delivery! Got my data in 5 minutes.”<br><b>- Akwesi Soja.</b></p>
+<p>“Very reliable. I always buy from Billionaire Data City.”<br><b>- Emmanuela Tey.</b></p>
+<p>“Affordable prices and no expiry. Highly recommend!”<br><b>- Kofi Banana.</b></p>
+</div>
+</section>
+
+<a href="https://wa.me/233542021230" class="whatsapp">💬</a>
+
+<script>
 let selectedNetwork="";
 let selectedPlan="";
 let orderMessage="";
@@ -7,7 +188,7 @@ let orderMessage="";
 const allBundles = {
 MTN:[
 ["1GB","4.8gh"],["2GB","9.5gh"],["3GB","13.5gh"],
-["4GB","18gh"],["5GB","23.5gh"],["6GB","26.5gh"],
+["4GB","18gh"],["5GB","23.5gh"],["6GB","25.5gh"],
 ["7GB","30.5gh"],["8GB","35gh"],["9GB","37.5gh"],
 ["10GB","42gh"],["12GB","50.5gh"],["15GB","60.5gh"],
 ["20GB","70gh"],["25GB","99gh"],["30GB","120gh"],
@@ -45,25 +226,24 @@ bundlesPage.classList.remove("hidden");
 bundleList.innerHTML="";
 
 allBundles[network].forEach(b=>{
-
 let badge="";
+let buttonStyle="background:#2e2a8f;color:white;"; // default
 
+// Only MTN gets special colors and badges
 if(network==="MTN"){
-
 let size=parseInt(b[0]);
-
 if(size>=1 && size<=5){
 badge=` <span style="background:red;color:white;padding:3px 6px;border-radius:6px;font-size:11px;">HOT DEAL</span>`;
+buttonStyle="background:red;color:white;";
 }
-
 if(size>=10){
 badge=` <span style="background:gold;color:black;padding:3px 6px;border-radius:6px;font-size:11px;">PREMIUM</span>`;
+buttonStyle="background:gold;color:black;";
 }
-
 }
 
 bundleList.innerHTML+=`
-<div class="bundle-btn" onclick="selectPlan('${b[0]}','${b[1]}')">
+<div class="bundle-btn" style="${buttonStyle}" onclick="selectPlan('${b[0]}','${b[1]}')">
 <h3>Buy ${b[0]} = ${b[1]} ${badge}</h3>
 <small>*No Expiry*</small>
 </div>`;
@@ -89,7 +269,6 @@ bundlesPage.classList.remove("hidden");
 }
 
 function placeOrder(){
-
 let name=document.getElementById("name").value.trim();
 let phone=document.getElementById("phone").value.trim();
 
@@ -119,5 +298,7 @@ window.location.href=`sms:0542021230?body=${orderMessage}`;
 function sendWhatsApp(){
 window.location.href=`https://wa.me/233542021230?text=${orderMessage}`;
 }
-
 </script>
+
+</body>
+</html>
